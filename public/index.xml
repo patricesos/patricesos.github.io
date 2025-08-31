@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Patrice&#39;s Brainyard</title>
+    <link>//localhost:10311/</link>
+    <description>Recent content on Patrice&#39;s Brainyard</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>patricesos7@gmail.com (Patrice G. Sossou)</managingEditor>
+    <webMaster>patricesos7@gmail.com (Patrice G. Sossou)</webMaster>
+    <copyright>© 2025 Patrice G. Sossou</copyright>
+    <lastBuildDate>Sun, 31 Aug 2025 19:08:28 +0000</lastBuildDate><atom:link href="//localhost:10311/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Article</title>
+      <link>//localhost:10311/posts/how-to-install-docker/</link>
+      <pubDate>Sun, 31 Aug 2025 19:08:28 +0000</pubDate>
+      <author>patricesos7@gmail.com (Patrice G. Sossou)</author>
+      <guid>//localhost:10311/posts/how-to-install-docker/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:10311/posts/how-to-install-docker/featured.jpg" />
+    </item>
+    
+    <item>
+      <title>Install Docker on Fedora</title>
+      <link>//localhost:10311/posts/article/</link>
+      <pubDate>Sun, 31 Aug 2025 19:08:28 +0000</pubDate>
+      <author>patricesos7@gmail.com (Patrice G. Sossou)</author>
+      <guid>//localhost:10311/posts/article/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:10311/posts/article/featured.jpg" />
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>//localhost:10311/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>patricesos7@gmail.com (Patrice G. Sossou)</author>
+      <guid>//localhost:10311/contact/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
