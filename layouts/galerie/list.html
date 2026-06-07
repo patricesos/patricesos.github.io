@@ -1,0 +1,19 @@
+  <div class="page-content" style="max-width:var(--content-wide)">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    <div class="gallery-grid">
+      {{ range $i, $img := sort (.Resources.ByType "image") "Name" }}
+      {{ $thumb := $img.Fill "400x300" }}
+      <a href="#lightbox-{{ $i }}" class="gallery-item">
+        <img src="{{ $thumb.RelPermalink }}" alt="{{ $img.Name }}" loading="lazy">
+      </a>
+      <div id="lightbox-{{ $i }}" class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}">
+      </div>
+      {{ else }}
+      <p>Aucune image pour le moment.</p>
+      {{ end }}
+    </div>
+  </div>

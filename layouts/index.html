@@ -1,0 +1,44 @@
+  <div class="home-intro">
+    <h1>{{ .Site.Title }}</h1>
+    <p>{{ .Site.Params.description }}</p>
+  </div>
+
+  {{ with where .Site.RegularPages "Section" "blog" }}
+  {{ $latest := first 3 . }}
+  <section class="home-section">
+    <h2>Derniers articles</h2>
+    <ul class="article-list">
+      {{ range $latest }}
+      <li class="article-item">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 janvier 2006" }}</time>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Description }}
+        <p>{{ . }}</p>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  {{ with .Site.GetPage "/galerie" }}
+  {{ $images := sort (.Resources.ByType "image") "Name" }}
+  {{ if ge (len $images) 3 }}
+  {{ $latest := first 3 $images }}
+  <section class="home-section">
+    <h2>Dernières de la galerie</h2>
+    <div class="gallery-grid">
+      {{ range $i, $img := $latest }}
+      {{ $thumb := $img.Fill "400x300" }}
+      <a href="#lightbox-{{ $i }}" class="gallery-item">
+        <img src="{{ $thumb.RelPermalink }}" alt="{{ $img.Name }}" loading="lazy">
+      </a>
+      <div id="lightbox-{{ $i }}" class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}">
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+  {{ end }}

@@ -1,0 +1,17 @@
+  <article class="page-content">
+    <p class="article-date">{{ .Date.Format "2 janvier 2006" }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    <nav class="article-nav">
+      <div>
+        {{ with .NextInSection }}
+        <a href="{{ .RelPermalink }}">&larr; {{ .Title }}</a>
+        {{ end }}
+      </div>
+      <div>
+        {{ with .PrevInSection }}
+        <a href="{{ .RelPermalink }}">{{ .Title }} &rarr;</a>
+        {{ end }}
+      </div>
+    </nav>
+  </article>

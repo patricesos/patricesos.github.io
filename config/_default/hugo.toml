@@ -1,0 +1,5 @@
+baseURL = 'https://patsos.github.io/'
+title = "Patrice's Brainyard"
+locale = 'fr-FR'
+uglyURLs = false
+paginate = 10

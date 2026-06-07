@@ -1,0 +1,12 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:type" content="website">
+<meta name="generator" content="Hugo">
+{{ with resources.Get "css/main.css" | resources.Minify }}
+<link rel="stylesheet" href="{{ .RelPermalink }}">
+{{ end }}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
