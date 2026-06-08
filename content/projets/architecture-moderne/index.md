@@ -7,6 +7,7 @@ cover: "img-4.jpg"
 description: "Visualisation architecturale d'un bâtiment contemporain. Lignes épurées, verre et béton."
 ---
 
+{{< gallery >}}
 {{< img src="img-4.jpg" layout="full" >}}
 {{< img src="img-02.jpg" layout="half" name="Façade vitrée" >}}
 {{< img src="img-03.jpg" layout="half" name="Lignes épurées" >}}
@@ -17,3 +18,4 @@ description: "Visualisation architecturale d'un bâtiment contemporain. Lignes �
 {{< img src="img-08.jpg" layout="half" name="Escalier suspendu" >}}
 {{< img src="img-09.jpg" layout="half" name="Patio intérieur" >}}
 {{< img src="img-10.jpg" layout="half" name="Toit-terrasse" >}}
+{{< /gallery >}}

@@ -7,6 +7,7 @@ cover: "img-5.jpg"
 description: "Simulation d'une mer déchaînée avec embruns et mouvement de surface. Recherche sur les vagues et l'érosion côtière."
 ---
 
+{{< gallery >}}
 {{< img src="img-5.jpg" layout="full" >}}
 {{< img src="img-02.jpg" layout="half" name="Vague déferlante" >}}
 {{< img src="img-03.jpg" layout="half" name="Écume blanche" >}}
@@ -17,3 +18,4 @@ description: "Simulation d'une mer déchaînée avec embruns et mouvement de sur
 {{< img src="img-08.jpg" layout="half" name="Marée montante" >}}
 {{< img src="img-09.jpg" layout="half" name="Phare sous la tempête" >}}
 {{< img src="img-10.jpg" layout="half" name="Calme après la tempête" >}}
+{{< /gallery >}}

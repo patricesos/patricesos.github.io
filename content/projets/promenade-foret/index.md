@@ -7,6 +7,7 @@ cover: "img-3.jpg"
 description: "Scène de forêt tempérée avec éclairage traversant la canopée. Recherche d'ambiance et de profondeur."
 ---
 
+{{< gallery >}}
 {{< img src="img-3.jpg" layout="full" >}}
 {{< img src="img-02.jpg" layout="half" name="Sous la canopée" >}}
 {{< img src="img-03.jpg" layout="half" name="Rayon de soleil" >}}
@@ -17,3 +18,4 @@ description: "Scène de forêt tempérée avec éclairage traversant la canopée
 {{< img src="img-08.jpg" layout="half" name="Sous-bois" >}}
 {{< img src="img-09.jpg" layout="half" name="Feuilles mortes" >}}
 {{< img src="img-10.jpg" layout="half" name="Brume matinale" >}}
+{{< /gallery >}}

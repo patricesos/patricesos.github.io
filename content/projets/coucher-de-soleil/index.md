@@ -7,6 +7,7 @@ cover: "img-1.jpg"
 description: "Exploration de lumière chaude sur une skyline urbaine. Travail sur les dégradés de ciel et les silhouettes."
 ---
 
+{{< gallery >}}
 {{< img src="img-1.jpg" layout="full" >}}
 {{< img src="img-02.jpg" layout="half" name="Dernière lumière sur les toits" >}}
 {{< img src="img-03.jpg" layout="half" name="Silhouettes urbaines" >}}
@@ -17,3 +18,4 @@ description: "Exploration de lumière chaude sur une skyline urbaine. Travail su
 {{< img src="img-08.jpg" layout="half" name="Horizon embrasé" >}}
 {{< img src="img-09.jpg" layout="half" name="L'heure bleue" >}}
 {{< img src="img-10.jpg" layout="half" name="Lampadaires et lueur chaude" >}}
+{{< /gallery >}}
