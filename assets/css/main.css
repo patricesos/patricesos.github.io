@@ -628,18 +628,26 @@ main.project-single .container {
 
 .project-gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 4px;
   margin-top: 2rem;
 }
 
-.media-half {
+.project-gallery figure {
   margin: 0;
 }
 
-.media-half img {
+.project-gallery figure img {
   width: 100%;
   display: block;
+}
+
+.project-gallery figure.half {
+  grid-column: span 2;
+}
+
+.project-gallery figure.full {
+  grid-column: 1 / -1;
 }
 
 footer {
@@ -745,6 +753,14 @@ footer a:hover {
 
   .project-body {
     padding: 1.5rem 1rem 3rem;
+  }
+
+  .project-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-gallery figure.half {
+    grid-column: span 1;
   }
 
   .lightbox {

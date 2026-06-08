@@ -1,0 +1,26 @@
+{{ with .Page.Params.gallery }}
+<div class="project-gallery">
+  {{ range $i, $entry := . }}
+  {{ $img := $.Page.Resources.GetMatch $entry.src }}
+  {{ $layout := $entry.layout | default "half" }}
+  {{ if $img }}
+  {{ $thumb := $img.Fill "800x500" }}
+  <figure class="{{ $layout }}">
+    <a href="#lightbox-{{ $.Ordinal }}-{{ $i }}">
+      <img src="{{ $thumb.RelPermalink }}" alt="{{ $entry.name }}" loading="lazy">
+    </a>
+  </figure>
+  <div id="lightbox-{{ $.Ordinal }}-{{ $i }}" class="lightbox">
+    <a href="#" class="lightbox-close">&times;</a>
+    <div class="lightbox-content">
+      <img src="{{ $img.RelPermalink }}" alt="{{ $entry.name }}">
+      <div class="lightbox-meta">
+        <span class="img-name">{{ $entry.name }}</span>
+        <span class="img-copyright">{{ with $entry.copyright }}{{ . }}{{ else }}{{ ($.Page.GetPage "/projets").Params.copyright }}{{ end }}</span>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+</div>
+{{ end }}
