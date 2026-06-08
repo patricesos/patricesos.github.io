@@ -593,6 +593,13 @@ main {
   letter-spacing: 0.02em;
 }
 
+.home-hero-logo {
+  display: block;
+  margin: 0 auto;
+  max-height: 120px;
+  width: auto;
+}
+
 .home-section {
   margin-top: 3rem;
   max-width: var(--content-wide);

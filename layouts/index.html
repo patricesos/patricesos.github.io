@@ -1,7 +1,11 @@
 {{ define "main" }}
   <div class="home-hero">
-    <h1 class="home-hero-name">Patrice</h1>
-    <p class="home-hero-tagline">Généraliste 2D/3D &middot; Technical Artist</p>
+    {{ with .Site.Params.heroLogo }}
+      <img src="{{ . }}" alt="" class="home-hero-logo">
+    {{ else }}
+      <h1 class="home-hero-name">{{ $.Site.Params.heroName }}</h1>
+    {{ end }}
+    <p class="home-hero-tagline">{{ .Site.Params.heroTagline }}</p>
   </div>
 
   {{ with .Site.GetPage "/projets" }}
