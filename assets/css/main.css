@@ -867,19 +867,27 @@ main {
 }
 
 .project-card-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 4px;
 }
 
 .project-card {
-  width: calc((100% - 8px) / 3);
   position: relative;
   display: block;
   overflow: hidden;
   text-decoration: none;
   border-radius: 6px;
-  aspect-ratio: 1 / 0.9;
+}
+
+.card-wide {
+  grid-column: span 3;
+  aspect-ratio: 1 / 0.85;
+}
+
+.card-small {
+  grid-column: span 2;
+  aspect-ratio: 1 / 1.1;
 }
 
 .project-card-img {
@@ -1235,11 +1243,12 @@ footer a:hover {
   }
 
   .project-card-grid {
-    gap: 4px;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .project-card {
-    width: calc((100% - 4px) / 2);
+  .card-wide, .card-small {
+    grid-column: span 1;
+    aspect-ratio: 1 / 0.9;
   }
 
   .project-card-title {
