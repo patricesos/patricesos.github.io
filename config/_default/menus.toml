@@ -1,19 +1,14 @@
 [[main]]
-  name = "Blog"
-  pageRef = "/blog/"
+  name = "Projets"
+  pageRef = "/projets/"
   weight = 10
 
 [[main]]
-  name = "Galerie"
-  pageRef = "/galerie/"
+  name = "Brainyard"
+  pageRef = "/brainyard/"
   weight = 20
 
 [[main]]
   name = "À propos"
   pageRef = "/a-propos/"
   weight = 30
-
-[[main]]
-  name = "Contact"
-  pageRef = "/contact/"
-  weight = 40

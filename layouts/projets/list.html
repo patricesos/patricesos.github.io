@@ -1,0 +1,29 @@
+{{ define "main" }}
+  <div class="page-content" style="max-width:var(--content-wide)">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    <div class="project-card-grid">
+      {{ range $project := .Pages.ByParam "year" }}
+      {{ $cover := $project.Resources.GetMatch $project.Params.cover }}
+      <a href="{{ $project.RelPermalink }}" class="project-card">
+        {{ with $cover }}
+        {{ $thumb := .Fill "600x400" }}
+        <div class="project-card-img">
+          <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        <div class="project-card-body">
+          <h3>{{ $project.Title }}</h3>
+          <span class="project-card-year">{{ $project.Params.year }}</span>
+          <div class="project-card-tools">
+            {{ range $project.Params.tools }}
+            <span class="project-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

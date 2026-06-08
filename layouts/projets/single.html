@@ -1,0 +1,69 @@
+{{ define "main" }}
+{{ $projetsSection := $.Site.GetPage "/projets" }}
+{{ $cover := .Resources.GetMatch .Params.cover }}
+<article class="project">
+  <div class="project-hero">
+    {{ with $cover }}
+    {{ $hero := .Fill "1600x800" }}
+    <img src="{{ $hero.RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+    {{ end }}
+  </div>
+
+  <div class="page-content">
+    <h1>{{ .Title }}</h1>
+
+    <div class="project-meta">
+      {{ with .Params.year }}<span class="project-meta-tag">{{ . }}</span>{{ end }}
+      {{ with .Params.role }}<span class="project-meta-tag">{{ . }}</span>{{ end }}
+      {{ with .Params.client }}<span class="project-meta-tag">{{ . }}</span>{{ end }}
+    </div>
+
+    <div class="project-tools">
+      {{ range .Params.tools }}
+      <span class="project-tag">{{ . }}</span>
+      {{ end }}
+    </div>
+
+    <div class="project-description">
+      {{ .Content }}
+    </div>
+
+    {{ with .Params.gallery }}
+    <div class="project-gallery">
+      {{ range $i, $entry := . }}
+      {{ $img := $.Resources.GetMatch $entry.src }}
+      {{ if $img }}
+      {{ $thumb := $img.Fill "800x500" }}
+      <figure class="gallery-item">
+        <a href="#lightbox-p-{{ $i }}">
+          <img src="{{ $thumb.RelPermalink }}" alt="{{ $entry.name }}" loading="lazy">
+        </a>
+        <figcaption class="gallery-caption">{{ $entry.name }}</figcaption>
+      </figure>
+
+      <div id="lightbox-p-{{ $i }}" class="lightbox">
+        <a href="#" class="lightbox-close">&times;</a>
+        <div class="lightbox-content">
+          <img src="{{ $img.RelPermalink }}" alt="{{ $entry.name }}">
+          <div class="lightbox-meta">
+            <span class="img-name">{{ $entry.name }}</span>
+            <span class="img-copyright">{{ with $entry.copyright }}{{ . }}{{ else }}{{ $projetsSection.Params.copyright }}{{ end }}</span>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <nav class="project-nav">
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="project-nav-prev">&larr; {{ .Title }}</a>
+      {{ end }}
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="project-nav-next">{{ .Title }} &rarr;</a>
+      {{ end }}
+    </nav>
+  </div>
+</article>
+{{ end }}
