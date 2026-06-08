@@ -23,21 +23,35 @@
   {{ end }}
 
   {{ with .Site.GetPage "/galerie" }}
-  {{ $images := sort (.Resources.ByType "image") "Name" }}
-  {{ if ge (len $images) 3 }}
-  {{ $latest := first 3 $images }}
+  {{ $gallery := . }}
+  {{ $entries := .Params.images }}
+  {{ if ge (len $entries) 1 }}
+  {{ $latest := first 3 $entries }}
   <section class="home-section">
     <h2>Dernières de la galerie</h2>
     <div class="gallery-grid">
-      {{ range $i, $img := $latest }}
+      {{ range $i, $entry := $latest }}
+      {{ $img := $gallery.Resources.GetMatch $entry.src }}
+      {{ if $img }}
       {{ $thumb := $img.Fill "400x300" }}
-      <a href="#lightbox-{{ $i }}" class="gallery-item">
-        <img src="{{ $thumb.RelPermalink }}" alt="{{ $img.Name }}" loading="lazy">
-      </a>
-      <div id="lightbox-{{ $i }}" class="lightbox">
+      <figure class="gallery-item">
+        <a href="#lightbox-home-{{ $i }}">
+          <img src="{{ $thumb.RelPermalink }}" alt="{{ $entry.name }}" loading="lazy">
+        </a>
+        <figcaption class="gallery-caption">{{ $entry.name }}</figcaption>
+      </figure>
+
+      <div id="lightbox-home-{{ $i }}" class="lightbox">
         <a href="#" class="lightbox-close">&times;</a>
-        <img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}">
+        <div class="lightbox-content">
+          <img src="{{ $img.RelPermalink }}" alt="{{ $entry.name }}">
+          <div class="lightbox-meta">
+            <span class="img-name">{{ $entry.name }}</span>
+            <span class="img-copyright">{{ with $entry.copyright }}{{ . }}{{ else }}{{ $gallery.Params.copyright }}{{ end }}</span>
+          </div>
+        </div>
       </div>
+      {{ end }}
       {{ end }}
     </div>
   </section>

@@ -4,16 +4,31 @@
     {{ .Content }}
 
     <div class="gallery-grid">
-      {{ range $i, $img := sort (.Resources.ByType "image") "Name" }}
+      {{ range $i, $entry := .Params.images }}
+      {{ $img := $.Resources.GetMatch $entry.src }}
+      {{ if $img }}
       {{ $thumb := $img.Fill "400x300" }}
-      <a href="#lightbox-{{ $i }}" class="gallery-item">
-        <img src="{{ $thumb.RelPermalink }}" alt="{{ $img.Name }}" loading="lazy">
-      </a>
+      <figure class="gallery-item">
+        <a href="#lightbox-{{ $i }}">
+          <img src="{{ $thumb.RelPermalink }}" alt="{{ $entry.name }}" loading="lazy">
+        </a>
+        <figcaption class="gallery-caption">{{ $entry.name }}</figcaption>
+      </figure>
+
       <div id="lightbox-{{ $i }}" class="lightbox">
         <a href="#" class="lightbox-close">&times;</a>
-        <img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}">
+        <div class="lightbox-content">
+          <img src="{{ $img.RelPermalink }}" alt="{{ $entry.name }}">
+          <div class="lightbox-meta">
+            <span class="img-name">{{ $entry.name }}</span>
+            <span class="img-copyright">{{ with $entry.copyright }}{{ . }}{{ else }}{{ $.Params.copyright }}{{ end }}</span>
+          </div>
+        </div>
       </div>
-      {{ else }}
+      {{ end }}
+      {{ end }}
+
+      {{ if not (len .Params.images) }}
       <p>Aucune image pour le moment.</p>
       {{ end }}
     </div>
