@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>{{ partial "head.html" . }}</head>
 <body>
-{{ partial "header.html" . }}
-<main>
+{{ if not (and (eq .Section "projets") .IsPage) }}{{ partial "header.html" . }}{{ end }}
+<main class="{{ block "bodyClass" . }}default{{ end }}">
   <div class="container">
     {{ block "main" . }}{{ end }}
   </div>
