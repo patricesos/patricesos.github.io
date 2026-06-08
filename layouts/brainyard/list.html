@@ -4,26 +4,39 @@
   <div>
     <h1>{{ .Title }}</h1>
     {{ .Content }}
-    <ul class="article-list">
-      {{ range .Pages }}
-      <li class="article-item">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }} {{ index $months (sub (int (.Date.Format "1")) 1) }} {{ .Date.Year }}</time>
-        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-        {{ with .Description }}
-        <p>{{ . }}</p>
+    {{ range .Pages.GroupByDate "2006" }}
+    {{ $year := .Key }}
+    <section id="annee-{{ $year }}" class="archive-section">
+      <h2>{{ $year }}</h2>
+      {{ range .Pages.GroupByDate "1" }}
+      {{ $mois := index $months (sub (int .Key) 1) }}
+      {{ $monthPad := printf "%02d" (int .Key) }}
+      <h3 id="{{ $year }}-{{ $monthPad }}">{{ $mois }}</h3>
+      <ul class="article-list">
+        {{ range .Pages }}
+        <li class="article-item">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }} {{ $mois }} {{ .Date.Year }}</time>
+          <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+          {{ with .Description }}
+          <p>{{ . }}</p>
+          {{ end }}
+        </li>
         {{ end }}
-      </li>
+      </ul>
       {{ end }}
-    </ul>
+    </section>
+    {{ end }}
   </div>
   <aside class="brainyard-archive">
     <h3>Archives</h3>
     {{ range .Pages.GroupByDate "2006" }}
-    <details class="archive-year"{{ if eq .Key (now.Format "2006") }} open{{ end }}>
-      <summary>{{ .Key }}</summary>
+    {{ $year := .Key }}
+    <details class="archive-year"{{ if eq $year (now.Format "2006") }} open{{ end }}>
+      <summary><a href="#annee-{{ $year }}">{{ $year }}</a></summary>
       {{ range .Pages.GroupByDate "1" }}
+      {{ $monthPad := printf "%02d" (int .Key) }}
       <div class="archive-month">
-        <span>{{ index $months (sub (int .Key) 1) }}</span>
+        <a href="#{{ $year }}-{{ $monthPad }}">{{ index $months (sub (int .Key) 1) }}</a>
         <span class="archive-count">{{ len .Pages }}</span>
       </div>
       {{ end }}
