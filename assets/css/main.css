@@ -638,7 +638,8 @@ main.project-single .container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 4px;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
+  max-width: 900px;
 }
 
 .project-gallery figure {
