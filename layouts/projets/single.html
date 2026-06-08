@@ -18,12 +18,6 @@
       {{ with .Params.client }}<span class="project-meta-tag">{{ . }}</span>{{ end }}
     </div>
 
-    <div class="project-tools">
-      {{ range .Params.tools }}
-      <span class="project-tag">{{ . }}</span>
-      {{ end }}
-    </div>
-
     <div class="project-description">
       {{ .Content }}
     </div>

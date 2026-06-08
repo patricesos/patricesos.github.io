@@ -13,15 +13,7 @@
           <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" loading="lazy">
         </div>
         {{ end }}
-        <div class="project-card-body">
-          <h3>{{ $project.Title }}</h3>
-          <span class="project-card-year">{{ $project.Params.year }}</span>
-          <div class="project-card-tools">
-            {{ range $project.Params.tools }}
-            <span class="project-tag">{{ . }}</span>
-            {{ end }}
-          </div>
-        </div>
+        <span class="project-card-title">{{ $project.Title }}</span>
       </a>
       {{ end }}
     </div>
