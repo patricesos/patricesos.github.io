@@ -598,6 +598,9 @@ main {
   margin: 0 auto;
   max-height: 120px;
   width: auto;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 .home-hero-logo.round {
