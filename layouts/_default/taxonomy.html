@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="page-content">
+  <h1>{{ .Title }}</h1>
+  <p class="taxonomy-count">{{ len .Pages }} article{{ if ne (len .Pages) 1 }}s{{ end }}</p>
+  <ul class="article-list">
+    {{ range .Pages }}
+    <li class="article-item">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{ with .Description }}
+      <p>{{ . }}</p>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="article-item-tags">
+        {{ range . }}
+        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

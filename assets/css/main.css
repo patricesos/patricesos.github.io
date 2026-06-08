@@ -438,13 +438,106 @@ main {
   margin-left: auto;
 }
 
-.article-date {
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
   font-family: var(--font-heading);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: #888;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   margin-bottom: 0.5rem;
+}
+
+.article-meta time {
+  color: #888;
+}
+
+.article-tags,
+.article-categories {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: baseline;
+}
+
+.tag,
+.category {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tag:hover,
+.category:hover {
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+.article-item-tags {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: baseline;
+}
+
+/* ── Taxonomy pages ── */
+.terms-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.term-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.term-chip:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(126,200,227,0.2);
+  text-decoration: none;
+}
+
+.term-count {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #999;
+  background: var(--bg);
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+}
+
+.taxonomy-count {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  color: #999;
+  margin-bottom: 1.5rem;
 }
 
 .gallery-grid {
