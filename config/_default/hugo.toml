@@ -1,4 +1,4 @@
-baseURL = 'https://patsos.github.io/'
+baseURL = 'https://patricesos.github.io/'
 title = "Patrice's Brainyard"
 locale = 'fr-FR'
 uglyURLs = false
