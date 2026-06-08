@@ -670,12 +670,14 @@ main {
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  scroll-margin-top: 60px;
 }
 
 .archive-section h3 {
   font-size: 1rem;
   margin: 1.5rem 0 0.5rem;
   color: var(--text);
+  scroll-margin-top: 60px;
 }
 
 .archive-section .article-list {
