@@ -19,6 +19,7 @@
   author = "Patrice Gnimdou SOSSOU"
   ogSiteName = "Patrice's Brainyard"
   ogLocale = "fr_FR"
+  ogImage = "images/avatar.png"
 
 [social]
   artstation = "https://artstation.com/patricesos"

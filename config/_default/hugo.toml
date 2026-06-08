@@ -4,3 +4,4 @@ locale = 'fr-FR'
 uglyURLs = false
 paginate = 10
 buildFuture = true
+enableRobotsTXT = true

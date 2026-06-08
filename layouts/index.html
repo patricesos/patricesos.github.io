@@ -2,7 +2,7 @@
   <div class="home-hero">
     {{ with .Site.Params.hero.logo }}
       <a href="/a-propos/" class="home-hero-logo-link">
-        <img src="{{ . }}" alt="" class="home-hero-logo {{ with $.Site.Params.hero.logoShape }}{{ . }}{{ end }}">
+        <img src="{{ . }}" alt="{{ $.Site.Params.hero.name }}" class="home-hero-logo {{ with $.Site.Params.hero.logoShape }}{{ . }}{{ end }}">
       </a>
     {{ else }}
       <h1 class="home-hero-name">{{ $.Site.Params.hero.name }}</h1>
