@@ -518,6 +518,8 @@ main {
   right: 0;
   padding: 1.5rem;
   pointer-events: none;
+  background: linear-gradient(transparent 40%, rgba(0,0,0,0.6));
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .project-card-title {
