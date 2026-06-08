@@ -4,9 +4,7 @@ title: "À propos"
 
 ## Qui je suis
 
-Bienvenue dans mon *brainyard* — un coin de cerveau où traînent du design, des images et de la technique.
-
-Je m'appelle Patrice, généraliste 2D/3D et technical artist. Ce site est mon portfolio et mon carnet de bord créatif.
+Patrice Gnimdou SOSSOU, Togolais. Artiste généraliste, technique de formation — je vois des problèmes partout. Je fais du Python, j'apprends le C++, et j'aspire à devenir technical artist CGI. Ce site est mon portfolio et mon carnet de bord.
 
 ## Le site
 
