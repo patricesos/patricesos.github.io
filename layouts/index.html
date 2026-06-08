@@ -39,21 +39,41 @@
   {{ end }}
 
   {{ with where .Site.RegularPages "Section" "brainyard" }}
-  {{ $latest := first 3 . }}
+  {{ $articles := . }}
+  {{ $latest := first 3 $articles }}
+  {{ $months := slice "janvier" "février" "mars" "avril" "mai" "juin" "juillet" "août" "septembre" "octobre" "novembre" "décembre" }}
   <section class="home-section home-brainyard">
-    <h2>Du Brainyard</h2>
-    <ul class="article-list">
-      {{ range $latest }}
-      <li class="article-item">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-        {{ with .Description }}
-        <p>{{ . }}</p>
+    <h2>Place au Brainyard</h2>
+    <div class="brainyard-layout">
+      <div class="brainyard-articles">
+        <ul class="article-list">
+          {{ range $latest }}
+          <li class="article-item">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            {{ with .Description }}
+            <p>{{ . }}</p>
+            {{ end }}
+          </li>
+          {{ end }}
+        </ul>
+        <p class="home-more"><a href="/brainyard/">Voir tous les articles &rarr;</a></p>
+      </div>
+      <aside class="brainyard-archive">
+        <h3>Archives</h3>
+        {{ range $articles.GroupByDate "2006" }}
+        <details class="archive-year"{{ if eq .Key (now.Format "2006") }} open{{ end }}>
+          <summary>{{ .Key }}</summary>
+          {{ range .Pages.GroupByDate "1" }}
+          <div class="archive-month">
+            <span>{{ index $months (sub (int .Key) 1) }}</span>
+            <span class="archive-count">{{ len .Pages }}</span>
+          </div>
+          {{ end }}
+        </details>
         {{ end }}
-      </li>
-      {{ end }}
-    </ul>
-    <p class="home-more"><a href="/brainyard/">Voir tous les articles &rarr;</a></p>
+      </aside>
+    </div>
   </section>
   {{ end }}
 {{ end }}

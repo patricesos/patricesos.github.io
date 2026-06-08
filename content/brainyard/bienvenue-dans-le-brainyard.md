@@ -26,3 +26,14 @@ Le site tourne sur [Hugo](https://gohugo.io), déployé sur GitHub Pages. Le th�
 Zéro JavaScript, zéro pisteur, zéro cookie. Juste du HTML propre et du CSS qui brille.
 
 Bienvenue.
+
+
+### Un exemple de codeblock
+
+```python
+def hello_world():
+    greeting = "Welcome to my Brainyard. "
+
+    if "Brain" in greeting:
+        print("You are in the Brainyard.")
+```

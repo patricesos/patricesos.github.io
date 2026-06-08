@@ -4,7 +4,7 @@ darkBg = "#131313"
 heroName = "Patrice"
 heroTagline = "Généraliste 2D/3D · Technical Artist"
 heroLogo = "images/avatar.png"
-heroShape = "square" # round, rounded-square
+heroShape = "rounded-square" # square, round, rounded-square
 
 [social]
   artstation = "https://artstation.com/patricesos"

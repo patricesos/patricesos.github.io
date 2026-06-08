@@ -639,6 +639,50 @@ main {
   margin-top: 4rem;
 }
 
+.brainyard-layout {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 3rem;
+}
+
+.brainyard-archive h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #999;
+  margin: 0 0 0.75rem;
+}
+
+.archive-year {
+  margin-bottom: 0.5rem;
+}
+
+.archive-year summary {
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+  user-select: none;
+}
+
+.archive-year summary::-webkit-details-marker {
+  color: var(--accent);
+}
+
+.archive-month {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem 0 0.2rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.archive-count {
+  font-size: 0.75rem;
+  color: #999;
+}
+
 .home-projects {
   margin: 0 calc(-1 * var(--gap));
 }
@@ -1066,6 +1110,11 @@ footer a:hover {
 
   .project-gallery figure.half {
     grid-column: span 1;
+  }
+
+  .brainyard-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .lightbox {
