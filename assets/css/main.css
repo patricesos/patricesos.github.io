@@ -438,6 +438,8 @@ main {
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: block;
+  margin-top: 0.5rem;
 }
 
 .article-item h2,
