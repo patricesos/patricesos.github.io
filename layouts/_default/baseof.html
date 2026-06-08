@@ -3,7 +3,7 @@
 <head>{{ partial "head.html" . }}</head>
 <body>
 {{ if not (and (eq .Section "projets") .IsPage) }}{{ partial "header.html" . }}{{ end }}
-<main class="{{ block "bodyClass" . }}default{{ end }}">
+<main id="main-content" class="{{ block "bodyClass" . }}default{{ end }}">
   <div class="container">
     {{ block "main" . }}{{ end }}
   </div>

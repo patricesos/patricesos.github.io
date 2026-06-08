@@ -12,6 +12,27 @@
   <div class="project-body">
     {{ with .Description }}<p class="project-description">{{ . }}</p>{{ end }}
     {{ .Content }}
+
+    {{ $prev := .NextInSection }}
+    {{ $next := .PrevInSection }}
+    {{ if or $prev $next }}
+    <nav class="project-nav">
+      {{ with $prev }}
+      <a href="{{ .RelPermalink }}" class="nav-prev">
+        <span class="nav-label">&larr; Pr&eacute;c&eacute;dent</span>
+        {{ .Title }}
+      </a>
+      {{ end }}
+      {{ with $next }}
+      <a href="{{ .RelPermalink }}" class="nav-next">
+        <span class="nav-label">Suivant &rarr;</span>
+        {{ .Title }}
+      </a>
+      {{ end }}
+    </nav>
+    {{ end }}
+
+    <a href="#" class="back-to-top">&uarr; Retour en haut</a>
   </div>
 </article>
 {{ end }}

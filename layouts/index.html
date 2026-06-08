@@ -1,5 +1,8 @@
 {{ define "main" }}
-  <div class="home-spacer"></div>
+  <div class="home-hero">
+    <h1 class="home-hero-name">Patrice</h1>
+    <p class="home-hero-tagline">Généraliste 2D/3D &middot; Technical Artist</p>
+  </div>
 
   {{ with .Site.GetPage "/projets" }}
   {{ $projects := .Pages.ByParam "weight" }}
@@ -15,7 +18,7 @@
           <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" loading="lazy">
         </div>
         {{ end }}
-        <div class="project-card-text" style="color: {{ $project.Params.cardColor | default "#fff" }}">
+        <div class="project-card-text">
           <span class="project-card-title">{{ $project.Title }}</span>
           {{ with $project.Params.client }}<span class="card-client"> / {{ . }}</span>{{ end }}
         </div>

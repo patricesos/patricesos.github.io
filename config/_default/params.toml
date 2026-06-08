@@ -1,3 +1,8 @@
 description = "Généraliste 2D/3D · Technical Artist"
 accentColor = "#7ec8e3"
 darkBg = "#131313"
+
+[social]
+  artstation = "https://artstation.com/patricesos"
+  linkedin = "https://linkedin.com/in/patricesos"
+  instagram = "https://instagram.com/patrice.is.ok"
