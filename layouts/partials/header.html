@@ -1,12 +1,12 @@
 <header>
   <div class="container">
     <a href="/" class="logo">{{ .Site.Title }}</a>
-    <input type="checkbox" id="menu-toggle"{{ if not .IsHome }} checked{{ end }}>
+    <input type="checkbox" id="menu-toggle">
     <label for="menu-toggle" class="hamburger" aria-label="Menu">&#9776;</label>
     <nav id="nav">
       <ul>
         {{ range .Site.Menus.main }}
-        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        <li><a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
         {{ end }}
       </ul>
     </nav>

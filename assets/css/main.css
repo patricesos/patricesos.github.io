@@ -15,7 +15,7 @@
   --code-text: #e2e8f0;
   --font-heading: 'Inter Variable', system-ui, -apple-system, sans-serif;
   --font-body: 'Klee One', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-  --font-code: 'MapleMono-Regular', 'Cascadia Code', 'Fira Code', monospace;
+  --font-code: 'MapleMono', 'Cascadia Code', 'Fira Code', monospace;
   --content-width: 740px;
   --content-wide: 1024px;
   --gap: 1.5rem;
@@ -46,16 +46,18 @@
 }
 
 @font-face {
-  font-family: 'MapleMono-Regular';
+  font-family: 'MapleMono';
   font-style: normal;
   font-display: swap;
+  font-weight: 400;
   src: url('/fonts/maple-mono/MapleMono-Regular.ttf.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'MapleMono-Bold';
+  font-family: 'MapleMono';
   font-style: normal;
   font-display: swap;
+  font-weight: 700;
   src: url('/fonts/maple-mono/MapleMono-Bold.ttf.woff2') format('woff2');
 }
 
@@ -111,6 +113,10 @@ code, pre {
   font-family: var(--font-code);
 }
 
+code strong, strong code {
+  font-weight: 700;
+}
+
 p > code, li > code {
   background: var(--border);
   padding: 0.15em 0.4em;
@@ -164,6 +170,10 @@ header .container {
   text-decoration: none;
 }
 
+#menu-toggle {
+  display: none;
+}
+
 .hamburger {
   display: none;
   font-size: 1.5rem;
@@ -194,6 +204,11 @@ nav a:hover {
   background: var(--accent);
   color: #fff;
   text-decoration: none;
+}
+
+nav a[aria-current="page"] {
+  background: var(--accent);
+  color: #fff;
 }
 
 main {
@@ -290,6 +305,10 @@ main {
   max-width: 45%;
 }
 
+.article-nav .nav-next {
+  margin-left: auto;
+}
+
 .article-date {
   font-family: var(--font-heading);
   font-size: 0.875rem;
@@ -310,6 +329,7 @@ main {
   overflow: hidden;
   border-radius: 10px;
   cursor: pointer;
+  display: block;
 }
 
 .gallery-item img {
@@ -325,18 +345,22 @@ main {
 }
 
 .lightbox {
-  display: none;
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.85);
   z-index: 200;
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .lightbox:target {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
 }
 
 .lightbox img {
@@ -461,10 +485,6 @@ footer a:hover {
     display: block;
   }
 
-  header .container {
-    flex-wrap: wrap;
-  }
-
   .gallery-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 0.75rem;
@@ -480,11 +500,5 @@ footer a:hover {
 
   .lightbox {
     padding: 1rem;
-  }
-}
-
-@media (min-width: 769px) {
-  #menu-toggle {
-    display: none;
   }
 }
