@@ -9,7 +9,7 @@ images:
     name: "Reflets dans l'eau"
     copyright: "Photo par Jean Dupont"
   - src: img-3.jpg
-    name: "Promenade en forêt"
+    name: "Promenade en forèt"
     copyright: "Image générée par IA"
   - src: img-4.jpg
     name: "Architecture moderne"
