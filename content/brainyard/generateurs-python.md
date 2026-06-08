@@ -2,6 +2,7 @@
 title: "Générateurs Python : la paresse qui rend productif"
 date: 2026-03-15
 description: "Comprendre les générateurs en Python, du yield de base aux generator expressions, avec des benchmarks concrets."
+thumbnail: "/images/brainyard/generateurs.jpg"
 tags: ["python", "programmation"]
 categories: ["dev", "tutorial"]
 ---

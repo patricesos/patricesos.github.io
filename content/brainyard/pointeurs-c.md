@@ -2,6 +2,7 @@
 title: "Les pointeurs en C : petits textes et gros dégâts"
 date: 2026-05-10
 description: "Une démo concrète des pointeurs en C, avec heap, stack, segmentation fault, et quelques leçons apprises à la dure."
+thumbnail: "/images/brainyard/pointeurs.jpg"
 tags: ["c", "programmation"]
 categories: ["dev", "tutorial"]
 ---

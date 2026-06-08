@@ -15,11 +15,20 @@
       <ul class="article-list">
         {{ range .Pages }}
         <li class="article-item">
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }} {{ $mois }} {{ .Date.Year }}</time>
-          <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
-          {{ with .Description }}
-          <p>{{ . }}</p>
-          {{ end }}
+          <a href="{{ .RelPermalink }}" class="article-thumb-link">
+            {{ with .Params.thumbnail }}
+            <img src="{{ . }}" alt="" class="article-thumb" loading="lazy">
+            {{ else }}
+            <span class="article-thumb-placeholder">{{ substr .Title 0 1 }}</span>
+            {{ end }}
+          </a>
+          <div class="article-item-body">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }} {{ $mois }} {{ .Date.Year }}</time>
+            <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+            {{ with .Description }}
+            <p>{{ . }}</p>
+            {{ end }}
+          </div>
         </li>
         {{ end }}
       </ul>

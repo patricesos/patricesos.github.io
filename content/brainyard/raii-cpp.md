@@ -3,6 +3,7 @@ title: "RAII en C++ : ne jamais oublier de libérer la mémoire"
 date: 2026-06-15
 description: "Le RAII est ce qui rend le C++ à la fois sûr et performant. Une démo avec smart pointers, scope guards et containers."
 tags: ["c++", "programmation"]
+thumbnail: "/images/brainyard/raii.jpg"
 categories: ["dev", "tutorial"]
 ---
 

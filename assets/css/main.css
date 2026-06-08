@@ -376,10 +376,12 @@ main {
 }
 
 .article-item {
+  display: flex;
+  gap: 1.25rem;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 1.5rem;
+  padding: 1.25rem;
   margin-bottom: 1rem;
   transition: box-shadow 0.25s ease, transform 0.25s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
@@ -388,6 +390,46 @@ main {
 .article-item:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   transform: translateY(-2px);
+}
+
+.article-thumb-link {
+  flex-shrink: 0;
+  width: 120px;
+  height: 90px;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.article-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.article-thumb-link:hover .article-thumb {
+  transform: scale(1.08);
+}
+
+.article-thumb-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.article-item-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .article-item time {
@@ -1235,6 +1277,15 @@ footer a:hover {
   .brainyard-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .article-item {
+    flex-direction: column;
+  }
+
+  .article-thumb-link {
+    width: 100%;
+    height: 160px;
   }
 
   .lightbox {
