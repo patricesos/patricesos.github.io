@@ -645,6 +645,10 @@ main {
   gap: 3rem;
 }
 
+.brainyard-layout.page-content {
+  max-width: var(--content-wide);
+}
+
 .brainyard-archive h3 {
   font-size: 1rem;
   text-transform: uppercase;

@@ -1,0 +1,34 @@
+{{ define "main" }}
+{{ $months := slice "janvier" "février" "mars" "avril" "mai" "juin" "juillet" "août" "septembre" "octobre" "novembre" "décembre" }}
+<div class="brainyard-layout page-content">
+  <div>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    <ul class="article-list">
+      {{ range .Pages }}
+      <li class="article-item">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Day }} {{ index $months (sub (int (.Date.Format "1")) 1) }} {{ .Date.Year }}</time>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Description }}
+        <p>{{ . }}</p>
+        {{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  <aside class="brainyard-archive">
+    <h3>Archives</h3>
+    {{ range .Pages.GroupByDate "2006" }}
+    <details class="archive-year"{{ if eq .Key (now.Format "2006") }} open{{ end }}>
+      <summary>{{ .Key }}</summary>
+      {{ range .Pages.GroupByDate "1" }}
+      <div class="archive-month">
+        <span>{{ index $months (sub (int .Key) 1) }}</span>
+        <span class="archive-count">{{ len .Pages }}</span>
+      </div>
+      {{ end }}
+    </details>
+    {{ end }}
+  </aside>
+</div>
+{{ end }}
