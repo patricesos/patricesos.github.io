@@ -1,10 +1,6 @@
 description = "Portfolio de Patrice — généraliste 2D/3D & technical artist"
 accentColor = "#7ec8e3"
 darkBg = "#131313"
-heroName = "Patrice"
-heroTagline = "Généraliste 2D/3D · Technical Artist"
-heroLogo = "images/avatar.png"
-heroShape = "rounded-square" # square, round, rounded-square
 favicon = "favicon.svg"
 faviconType = "image/svg+xml"
 copyright = "Patrice Gnimdou SOSSOU"
@@ -12,6 +8,12 @@ author = "Patrice Gnimdou SOSSOU"
 email = "patricesos7@gmail.com"
 ogSiteName = "Patrice's Brainyard"
 ogLocale = "fr_FR"
+
+[hero]
+  name = "Patrice"
+  tagline = "Généraliste 2D/3D · Technical Artist"
+  logo = "images/avatar.png"
+  logoShape = "rounded-square" # square, round, rounded-square
 
 [social]
   artstation = "https://artstation.com/patricesos"

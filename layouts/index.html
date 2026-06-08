@@ -1,13 +1,13 @@
 {{ define "main" }}
   <div class="home-hero">
-    {{ with .Site.Params.heroLogo }}
+    {{ with .Site.Params.hero.logo }}
       <a href="/a-propos/" class="home-hero-logo-link">
-        <img src="{{ . }}" alt="" class="home-hero-logo {{ with $.Site.Params.heroShape }}{{ . }}{{ end }}">
+        <img src="{{ . }}" alt="" class="home-hero-logo {{ with $.Site.Params.hero.logoShape }}{{ . }}{{ end }}">
       </a>
     {{ else }}
-      <h1 class="home-hero-name">{{ $.Site.Params.heroName }}</h1>
+      <h1 class="home-hero-name">{{ $.Site.Params.hero.name }}</h1>
     {{ end }}
-    <p class="home-hero-tagline">{{ .Site.Params.heroTagline }}</p>
+    <p class="home-hero-tagline">{{ .Site.Params.hero.tagline }}</p>
   </div>
 
   {{ with .Site.GetPage "/projets" }}
