@@ -3,34 +3,36 @@
   <div class="container">
     <a href="/" class="logo">{{ .Site.Title }}</a>
 
-    <nav id="nav">
-      <ul>
-        {{ range .Site.Menus.main }}
-        <li{{ if .HasChildren }} class="has-children"{{ end }}>
-          <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} aria-current="page"{{ end }}>{{ .Name }}</a>
-          {{ if .HasChildren }}
-          <ul class="sub-menu">
-            {{ range .Children }}
-            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+    <div class="header-right">
+      <nav id="nav">
+        <ul>
+          {{ range .Site.Menus.main }}
+          <li{{ if .HasChildren }} class="has-children"{{ end }}>
+            <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} aria-current="page"{{ end }}>{{ .Name }}</a>
+            {{ if .HasChildren }}
+            <ul class="sub-menu">
+              {{ range .Children }}
+              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+              {{ end }}
+            </ul>
             {{ end }}
-          </ul>
+          </li>
           {{ end }}
-        </li>
+        </ul>
+      </nav>
+
+      {{ with .Site.Params.social }}
+      <div class="header-actions">
+        {{ range $platform, $url := . }}
+        <a href="{{ $url }}" target="_blank" rel="noopener" aria-label="{{ $platform | title }}">
+          {{ partial "social-icon" $platform }}
+        </a>
         {{ end }}
-      </ul>
-    </nav>
-
-    {{ with .Site.Params.social }}
-    <div class="header-actions">
-      {{ range $platform, $url := . }}
-      <a href="{{ $url }}" target="_blank" rel="noopener" aria-label="{{ $platform | title }}">
-        {{ partial "social-icon" $platform }}
-      </a>
+      </div>
       {{ end }}
-    </div>
-    {{ end }}
 
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="hamburger" aria-label="Menu">&#9776;</label>
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="hamburger" aria-label="Menu">&#9776;</label>
+    </div>
   </div>
 </header>

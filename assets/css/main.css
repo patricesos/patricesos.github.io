@@ -206,9 +206,16 @@ header {
 }
 
 header .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
   height: 46px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .logo {
