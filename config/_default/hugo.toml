@@ -3,3 +3,4 @@ title = "Patrice's Brainyard"
 locale = 'fr-FR'
 uglyURLs = false
 paginate = 10
+buildFuture = true
