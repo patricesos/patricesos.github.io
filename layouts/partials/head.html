@@ -2,11 +2,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
 <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta property="og:type" content="website">
+{{ with .Site.Params.ogSiteName }}<meta property="og:site_name" content="{{ . }}">{{ end }}
+{{ with .Site.Params.ogLocale }}<meta property="og:locale" content="{{ . }}">{{ end }}
 <meta name="generator" content="Hugo">
 {{ with resources.Get "css/main.css" | resources.Minify }}
 <link rel="stylesheet" href="{{ .RelPermalink }}">
 {{ end }}
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{ .Site.Params.favicon }}" type="{{ .Site.Params.faviconType }}">

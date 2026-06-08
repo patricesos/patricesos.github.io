@@ -5,8 +5,16 @@ heroName = "Patrice"
 heroTagline = "Généraliste 2D/3D · Technical Artist"
 heroLogo = "images/avatar.png"
 heroShape = "rounded-square" # square, round, rounded-square
+favicon = "favicon.svg"
+faviconType = "image/svg+xml"
+copyright = "Patrice Gnimdou SOSSOU"
+author = "Patrice Gnimdou SOSSOU"
+email = "patricesos7@gmail.com"
+ogSiteName = "Patrice's Brainyard"
+ogLocale = "fr_FR"
 
 [social]
   artstation = "https://artstation.com/patricesos"
   linkedin = "https://linkedin.com/in/patricesos"
   instagram = "https://instagram.com/patrice.is.ok"
+  github = "https://github.com/patricesos"
