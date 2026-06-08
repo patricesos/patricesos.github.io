@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Bienvenue dans le Brainyard"
 date: 2026-06-01
 description: "Premier article de ce nouveau carnet numérique."

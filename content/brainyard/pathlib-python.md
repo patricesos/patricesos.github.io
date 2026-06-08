@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Pathlib : adieu les chaînes de caractères bancales"
 date: 2026-04-20
 description: "Manipuler les chemins fichiers avec pathlib, l'API propre et cross-platform que Python mérite."

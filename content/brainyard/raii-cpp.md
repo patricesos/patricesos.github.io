@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "RAII en C++ : ne jamais oublier de libérer la mémoire"
 date: 2026-06-15
 description: "Le RAII est ce qui rend le C++ à la fois sûr et performant. Une démo avec smart pointers, scope guards et containers."
