@@ -867,12 +867,13 @@ main {
 }
 
 .project-card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 4px;
 }
 
 .project-card {
+  width: calc((100% - 8px) / 3);
   position: relative;
   display: block;
   overflow: hidden;
@@ -1234,7 +1235,11 @@ footer a:hover {
   }
 
   .project-card-grid {
-    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .project-card {
+    width: calc((100% - 4px) / 2);
   }
 
   .project-card-title {
