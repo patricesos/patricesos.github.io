@@ -1,8 +1,8 @@
 ---
 title: "Promenade en forêt"
+weight: 30
 year: 2026
-role: "Génération IA"
-tools: ["Stable Diffusion", "ComfyUI"]
+cardColor: "#fff"
 cover: "img-3.jpg"
 gallery:
   - src: "img-3.jpg"

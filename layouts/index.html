@@ -1,36 +1,37 @@
 {{ define "main" }}
-  <section class="home-hero">
-    <h1>{{ .Site.Title }}</h1>
-    <p class="home-tagline">{{ .Site.Params.description }}</p>
-  </section>
+  <div class="home-spacer"></div>
 
   {{ with .Site.GetPage "/projets" }}
-  {{ $projects := .Pages.ByParam "year" }}
+  {{ $projects := .Pages.ByParam "weight" }}
   {{ if ge (len $projects) 1 }}
-  <section class="home-section">
-    <h2>Projets récents</h2>
+  <div class="home-projects">
     <div class="project-card-grid">
-      {{ range $project := $projects }}
+      {{ range $i, $project := $projects }}
       {{ $cover := $project.Resources.GetMatch $project.Params.cover }}
-      <a href="{{ $project.RelPermalink }}" class="project-card">
+      <a href="{{ $project.RelPermalink }}" class="project-card {{ if lt $i 2 }}card-wide{{ else }}card-small{{ end }}">
         {{ with $cover }}
-        {{ $thumb := .Fill "600x400" }}
+        {{ $thumb := .Fill "800x600" }}
         <div class="project-card-img">
           <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" loading="lazy">
         </div>
         {{ end }}
-        <span class="project-card-title">{{ $project.Title }}</span>
+        <div class="project-card-text" style="color: {{ $project.Params.cardColor | default "#fff" }}">
+          <span class="project-card-title">{{ $project.Title }}</span>
+          {{ with $project.Params.client }}<span class="card-client"> / {{ . }}</span>{{ end }}
+        </div>
       </a>
       {{ end }}
     </div>
+    {{ if gt (len $projects) 5 }}
     <p class="home-more"><a href="/projets/">Voir tous les projets &rarr;</a></p>
-  </section>
+    {{ end }}
+  </div>
   {{ end }}
   {{ end }}
 
   {{ with where .Site.RegularPages "Section" "brainyard" }}
   {{ $latest := first 3 . }}
-  <section class="home-section">
+  <section class="home-section home-brainyard">
     <h2>Du Brainyard</h2>
     <ul class="article-list">
       {{ range $latest }}

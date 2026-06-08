@@ -1,19 +1,21 @@
 {{ define "main" }}
   <div class="page-content" style="max-width:var(--content-wide)">
     <h1>{{ .Title }}</h1>
-    {{ .Content }}
 
     <div class="project-card-grid">
-      {{ range $project := .Pages.ByParam "year" }}
+      {{ range $i, $project := .Pages.ByParam "weight" }}
       {{ $cover := $project.Resources.GetMatch $project.Params.cover }}
-      <a href="{{ $project.RelPermalink }}" class="project-card">
+      <a href="{{ $project.RelPermalink }}" class="project-card {{ if lt $i 2 }}card-wide{{ else }}card-small{{ end }}">
         {{ with $cover }}
-        {{ $thumb := .Fill "600x400" }}
+        {{ $thumb := .Fill "800x600" }}
         <div class="project-card-img">
           <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" loading="lazy">
         </div>
         {{ end }}
-        <span class="project-card-title">{{ $project.Title }}</span>
+        <div class="project-card-text" style="color: {{ $project.Params.cardColor | default "#fff" }}">
+          <span class="project-card-title">{{ $project.Title }}</span>
+          {{ with $project.Params.client }}<span class="card-client"> / {{ . }}</span>{{ end }}
+        </div>
       </a>
       {{ end }}
     </div>

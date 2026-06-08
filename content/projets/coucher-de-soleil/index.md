@@ -1,8 +1,8 @@
 ---
 title: "Coucher de soleil sur la ville"
+weight: 10
 year: 2026
-role: "Art numérique"
-tools: ["Photoshop", "Lightroom"]
+cardColor: "#fff"
 cover: "img-1.jpg"
 gallery:
   - src: "img-1.jpg"

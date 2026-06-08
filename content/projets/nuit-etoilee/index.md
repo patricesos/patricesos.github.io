@@ -1,8 +1,8 @@
 ---
 title: "Nuit étoilée"
+weight: 60
 year: 2026
-role: "Art numérique"
-tools: ["Blender", "Photoshop"]
+cardColor: "#fff"
 cover: "img-6.jpg"
 gallery:
   - src: "img-6.jpg"

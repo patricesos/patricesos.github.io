@@ -1,8 +1,8 @@
 ---
 title: "Architecture moderne"
+weight: 40
 year: 2026
-role: "Design graphique"
-tools: ["Blender", "Photoshop"]
+cardColor: "#fff"
 cover: "img-4.jpg"
 gallery:
   - src: "img-4.jpg"
