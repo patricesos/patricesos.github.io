@@ -702,6 +702,18 @@ main {
   background: linear-gradient(transparent 10%, rgba(0,0,0,0.7));
   text-shadow: 0 2px 8px rgba(0,0,0,0.5);
   color: #fff;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+@media (hover: hover) {
+  .project-card-text {
+    opacity: 0;
+  }
+
+  .project-card:hover .project-card-text {
+    opacity: 1;
+  }
 }
 
 .project-card-title {
