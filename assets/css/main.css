@@ -600,6 +600,14 @@ main {
   width: auto;
 }
 
+.home-hero-logo.round {
+  border-radius: 50%;
+}
+
+.home-hero-logo.rounded-square {
+  border-radius: 16px;
+}
+
 .home-section {
   margin-top: 3rem;
   max-width: var(--content-wide);

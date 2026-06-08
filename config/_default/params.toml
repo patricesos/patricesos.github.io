@@ -3,7 +3,8 @@ accentColor = "#7ec8e3"
 darkBg = "#131313"
 heroName = "Patrice"
 heroTagline = "Généraliste 2D/3D · Technical Artist"
-# heroLogo = "/img/avatar.svg"
+heroLogo = "images/avatar.png"
+heroShape = "square"
 
 [social]
   artstation = "https://artstation.com/patricesos"
