@@ -848,7 +848,6 @@ main {
 }
 
 .home-projects {
-  margin: 0 calc(-1 * var(--gap));
 }
 
 .home-more {
@@ -873,14 +872,10 @@ main {
   gap: 4px;
 }
 
-.card-wide {
-  grid-column: span 3;
-  aspect-ratio: 1 / 0.85;
-}
-
-.card-small {
-  grid-column: span 2;
-  aspect-ratio: 1 / 1.1;
+.project-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
 }
 
 .project-card {
@@ -889,6 +884,7 @@ main {
   overflow: hidden;
   text-decoration: none;
   border-radius: 6px;
+  aspect-ratio: 1 / 0.9;
 }
 
 .project-card-img {
@@ -1245,11 +1241,6 @@ footer a:hover {
 
   .project-card-grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .card-wide, .card-small {
-    grid-column: span 1;
-    aspect-ratio: 1 / 0.9;
   }
 
   .project-card-title {

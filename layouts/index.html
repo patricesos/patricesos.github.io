@@ -17,7 +17,7 @@
     <div class="project-card-grid">
       {{ range $i, $project := $projects }}
       {{ $cover := $project.Resources.GetMatch $project.Params.cover }}
-      <a href="{{ $project.RelPermalink }}" class="project-card {{ if lt $i 2 }}card-wide{{ else }}card-small{{ end }}">
+      <a href="{{ $project.RelPermalink }}" class="project-card">
         {{ with $cover }}
         {{ $thumb := .Fill "800x600" }}
         <div class="project-card-img">
