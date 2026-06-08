@@ -5,36 +5,15 @@ year: 2026
 cardColor: "#fff"
 cover: "img-4.jpg"
 description: "Visualisation architecturale d'un bâtiment contemporain. Lignes épurées, verre et béton."
-gallery:
-  - src: "img-4.jpg"
-    layout: "full"
-  - src: "img-02.jpg"
-    name: "Façade vitrée"
-    layout: "half"
-  - src: "img-03.jpg"
-    name: "Lignes épurées"
-    layout: "half"
-  - src: "img-04.jpg"
-    name: "Jeu d'ombres"
-    layout: "full"
-  - src: "img-05.jpg"
-    name: "Béton brut"
-    layout: "half"
-  - src: "img-06.jpg"
-    name: "Angle droit"
-    layout: "half"
-  - src: "img-07.jpg"
-    name: "Transparence structurelle"
-    layout: "half"
-  - src: "img-08.jpg"
-    name: "Escalier suspendu"
-    layout: "half"
-  - src: "img-09.jpg"
-    name: "Patio intérieur"
-    layout: "half"
-  - src: "img-10.jpg"
-    name: "Toit-terrasse"
-    layout: "half"
 ---
 
-{{< gallery >}}
+{{< img src="img-4.jpg" layout="full" >}}
+{{< img src="img-02.jpg" layout="half" name="Façade vitrée" >}}
+{{< img src="img-03.jpg" layout="half" name="Lignes épurées" >}}
+{{< img src="img-04.jpg" layout="full" name="Jeu d'ombres" >}}
+{{< img src="img-05.jpg" layout="half" name="Béton brut" >}}
+{{< img src="img-06.jpg" layout="half" name="Angle droit" >}}
+{{< img src="img-07.jpg" layout="half" name="Transparence structurelle" >}}
+{{< img src="img-08.jpg" layout="half" name="Escalier suspendu" >}}
+{{< img src="img-09.jpg" layout="half" name="Patio intérieur" >}}
+{{< img src="img-10.jpg" layout="half" name="Toit-terrasse" >}}

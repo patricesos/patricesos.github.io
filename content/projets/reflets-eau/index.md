@@ -5,36 +5,15 @@ year: 2026
 cardColor: "#fff"
 cover: "img-2.jpg"
 description: "Étude de réfraction et de reflets sur une surface d'eau calme. Travail sur les shaders et la transparence."
-gallery:
-  - src: "img-2.jpg"
-    layout: "full"
-  - src: "img-02.jpg"
-    name: "Surface calme"
-    layout: "half"
-  - src: "img-03.jpg"
-    name: "Rivière miroir"
-    layout: "half"
-  - src: "img-04.jpg"
-    name: "Douce ondulation"
-    layout: "full"
-  - src: "img-05.jpg"
-    name: "Berge et reflet"
-    layout: "half"
-  - src: "img-06.jpg"
-    name: "Ciel inversé"
-    layout: "half"
-  - src: "img-07.jpg"
-    name: "Pont suspendu"
-    layout: "half"
-  - src: "img-08.jpg"
-    name: "Transparence"
-    layout: "half"
-  - src: "img-09.jpg"
-    name: "Eau dormante"
-    layout: "half"
-  - src: "img-10.jpg"
-    name: "Lumière liquide"
-    layout: "half"
 ---
 
-{{< gallery >}}
+{{< img src="img-2.jpg" layout="full" >}}
+{{< img src="img-02.jpg" layout="half" name="Surface calme" >}}
+{{< img src="img-03.jpg" layout="half" name="Rivière miroir" >}}
+{{< img src="img-04.jpg" layout="full" name="Douce ondulation" >}}
+{{< img src="img-05.jpg" layout="half" name="Berge et reflet" >}}
+{{< img src="img-06.jpg" layout="half" name="Ciel inversé" >}}
+{{< img src="img-07.jpg" layout="half" name="Pont suspendu" >}}
+{{< img src="img-08.jpg" layout="half" name="Transparence" >}}
+{{< img src="img-09.jpg" layout="half" name="Eau dormante" >}}
+{{< img src="img-10.jpg" layout="half" name="Lumière liquide" >}}

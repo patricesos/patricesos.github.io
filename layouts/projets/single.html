@@ -10,12 +10,8 @@
   </div>
 
   <div class="project-body">
-    <div class="project-editorial">
-      {{ with .Description }}
-      <p>{{ . }}</p>
-      {{ end }}
-      {{ .Content }}
-    </div>
+    {{ with .Description }}<p class="project-description">{{ . }}</p>{{ end }}
+    {{ .Content }}
   </div>
 </article>
 {{ end }}
