@@ -11,13 +11,13 @@ On split `hugo.toml` par root key dans `config/_default/` :
 ```
 config/_default/
 ├── hugo.toml      # baseURL, title, locale, paginate, uglyURLs
-├── params.toml    # params : description, accentColor, darkBg
+├── params.toml    # sections : [site], [ui], [hero], [seo], [social]
 ├── menus.toml     # menu.main
 └── markup.toml    # goldmark unsafe = true
 ```
 
 **Important (v0.160)** : Dans les fichiers splittés, on **omet** la root key.
-- `params.toml` → `description = "..."` (pas `[params]`)
+- `params.toml` → sections `[site]`, `[hero]`, `[seo]` etc. (pas `[params]`)
 - `menus.toml` → `[[main]]` (pas `[menus]`)
 
 La fonctionnalité 'root key unwrapping' (inclure `[params]` dans `params.toml`) est arrivée en **v0.162.0** — NE PAS utiliser sur ce projet.
