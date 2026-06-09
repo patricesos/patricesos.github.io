@@ -14,7 +14,7 @@
   logoShape = "rounded-square" # square, round, rounded-square
 
 [seo]
-  favicon = "favicon.svg"
+  favicon = "/favicon.svg"
   faviconType = "image/svg+xml"
   author = "Patrice Gnimdou SOSSOU"
   ogSiteName = "Patrice's Brainyard"

@@ -20,7 +20,11 @@
 
 <link rel="canonical" href="{{ .Permalink }}">
 <meta name="generator" content="Hugo">
-{{ with resources.Get "css/main.css" | resources.Minify }}
-<link rel="stylesheet" href="{{ .RelPermalink }}">
+
+<link rel="preload" href="/fonts/inter/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://player.vimeo.com">
+
+{{ with resources.Get "css/main.css" | resources.Minify | resources.Fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
 {{ end }}
 <link rel="icon" href="{{ .Site.Params.seo.favicon }}" type="{{ .Site.Params.seo.faviconType }}">

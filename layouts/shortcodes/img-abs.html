@@ -1,0 +1,20 @@
+{{ $src := .Get "src" }}
+{{ $layout := .Get "layout" | default "half" }}
+{{ $name := .Get "name" }}
+{{ $copyright := .Get "copyright" }}
+<figure class="{{ $layout }}">
+  <a href="#lightbox-abs-{{ .Ordinal }}">
+    <img src="{{ $src }}" alt="{{ $name }}" loading="lazy">
+  </a>
+</figure>
+<div id="lightbox-abs-{{ .Ordinal }}" class="lightbox">
+  <a href="#" class="lightbox-bg"></a>
+  <a href="#" class="lightbox-close">&times;</a>
+  <div class="lightbox-content">
+    <img src="{{ $src }}" alt="{{ $name }}">
+    <div class="lightbox-meta">
+      {{ with $name }}<span class="img-name">{{ . }}</span>{{ end }}
+      <span class="img-copyright">{{ with $copyright }}{{ . }}{{ else }}{{ with site.GetPage "/projets" }}{{ with .Params.copyright }}{{ . }}{{ end }}{{ end }}{{ end }}</span>
+    </div>
+  </div>
+</div>

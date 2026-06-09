@@ -1,7 +1,8 @@
 {{ define "main" }}
+  {{ if ne .Params.showHero false }}
   <div class="home-hero">
     {{ with .Site.Params.hero.logo }}
-      <a href="/a-propos/" class="home-hero-logo-link">
+      <a href="/a-propos/" class="home-hero-logo-link" aria-label="À propos">
         <img src="{{ . }}" alt="{{ $.Site.Params.hero.name }}" class="home-hero-logo {{ with $.Site.Params.hero.logoShape }}{{ . }}{{ end }}">
       </a>
     {{ else }}
@@ -9,51 +10,9 @@
     {{ end }}
     <p class="home-hero-tagline">{{ .Site.Params.hero.tagline }}</p>
   </div>
+  {{ end }}
 
-  {{ with .Site.GetPage "/projets" }}
-  {{ $projects := .Pages.ByParam "weight" }}
-  {{ if ge (len $projects) 1 }}
-  <div class="home-projects">
-    <div class="project-card-grid">
-      {{ range $i, $project := $projects }}
-      {{ $cover := $project.Resources.GetMatch $project.Params.cover }}
-      <a href="{{ $project.RelPermalink }}" class="project-card {{ if lt $i 2 }}card-wide{{ else }}card-small{{ end }}">
-        {{ with $cover }}
-        {{ $thumb := .Fill "800x600" }}
-        <div class="project-card-img">
-          <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" loading="lazy">
-        </div>
-        {{ end }}
-        <div class="project-card-text">
-          <span class="project-card-title">{{ $project.Title }}</span>
-          {{ with $project.Params.client }}<span class="card-client"> / {{ . }}</span>{{ end }}
-        </div>
-      </a>
-      {{ end }}
-    </div>
-    {{ if gt (len $projects) 5 }}
-    <p class="home-more"><a href="/projets/">Voir tous les projets &rarr;</a></p>
-    {{ end }}
+  <div class="home-content">
+    {{ .Content }}
   </div>
-  {{ end }}
-  {{ end }}
-
-  {{ with where .Site.RegularPages "Section" "brainyard" }}
-  {{ $latest := first 3 . }}
-  <section class="home-section home-brainyard">
-    <h2>Place au Brainyard</h2>
-    <ul class="article-list">
-      {{ range $latest }}
-      <li class="article-item">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-        {{ with .Description }}
-        <p>{{ . }}</p>
-        {{ end }}
-      </li>
-      {{ end }}
-    </ul>
-    <p class="home-more"><a href="/brainyard/">Voir tous les articles &rarr;</a></p>
-  </section>
-  {{ end }}
 {{ end }}

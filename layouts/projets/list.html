@@ -9,7 +9,7 @@
         {{ with $cover }}
         {{ $thumb := .Fill "800x600" }}
         <div class="project-card-img">
-          <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" loading="lazy">
+          <img src="{{ $thumb.RelPermalink }}" alt="{{ $project.Title }}" width="800" height="600" loading="lazy">
         </div>
         {{ end }}
         <div class="project-card-text">

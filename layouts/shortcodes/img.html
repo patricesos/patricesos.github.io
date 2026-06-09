@@ -7,14 +7,14 @@
 {{ $thumb := $img.Fill "800x500" }}
 <figure class="{{ $layout }}">
   <a href="#lightbox-{{ .Ordinal }}">
-    <img src="{{ $thumb.RelPermalink }}" alt="{{ $name }}" loading="lazy">
+    <img src="{{ $thumb.RelPermalink }}" alt="{{ $name }}" width="800" height="500" loading="lazy">
   </a>
 </figure>
 <div id="lightbox-{{ .Ordinal }}" class="lightbox">
   <a href="#" class="lightbox-bg"></a>
   <a href="#" class="lightbox-close">&times;</a>
   <div class="lightbox-content">
-    <img src="{{ $img.RelPermalink }}" alt="{{ $name }}">
+    <img src="{{ $img.RelPermalink }}" alt="{{ $name }}" width="{{ $img.Width }}" height="{{ $img.Height }}">
     <div class="lightbox-meta">
       {{ with $name }}<span class="img-name">{{ . }}</span>{{ end }}
       <span class="img-copyright">{{ with $copyright }}{{ . }}{{ else }}{{ ($.Page.GetPage "/projets").Params.copyright }}{{ end }}</span>
