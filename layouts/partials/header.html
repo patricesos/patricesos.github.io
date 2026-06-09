@@ -4,6 +4,8 @@
     <a href="/" class="logo">{{ .Site.Title }}</a>
 
     <div class="header-right">
+      <input type="checkbox" id="menu-toggle">
+
       <nav id="nav">
         <ul>
           {{ range .Site.Menus.main }}
@@ -31,7 +33,6 @@
       </div>
       {{ end }}
 
-      <input type="checkbox" id="menu-toggle">
       <label for="menu-toggle" class="hamburger" aria-label="Menu">&#9776;</label>
     </div>
   </div>
