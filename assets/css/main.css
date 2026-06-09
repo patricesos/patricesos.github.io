@@ -471,9 +471,10 @@ main {
 }
 
 .article-item p {
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
   font-size: 0.9375rem;
   color: #555;
   margin-bottom: 0;
