@@ -1,0 +1,39 @@
+{{ $before := .Get "before" }}
+{{ $after := .Get "after" }}
+{{ $layout := .Get "layout" | default "half" }}
+{{ $beforeName := .Get "beforeName" | default "Avant" }}
+{{ $afterName := .Get "afterName" | default "Après" }}
+
+<figure class="{{ $layout }}">
+  <div class="compare" style="--pct: 50%">
+    <div class="compare-before" data-label="{{ $beforeName }}">
+      {{ if hasPrefix $before "/" }}
+      <img src="{{ $before }}" alt="{{ $beforeName }}" loading="lazy">
+      {{ else }}
+      {{ with $.Page.Resources.GetMatch $before }}
+      {{ $thumb := .Fill "800x500" }}
+      <img src="{{ $thumb.RelPermalink }}" alt="{{ $beforeName }}" width="800" height="500" loading="lazy">
+      {{ end }}
+      {{ end }}
+    </div>
+    <div class="compare-after" data-label="{{ $afterName }}">
+      {{ if hasPrefix $after "/" }}
+      <img src="{{ $after }}" alt="{{ $afterName }}" loading="lazy">
+      {{ else }}
+      {{ with $.Page.Resources.GetMatch $after }}
+      {{ $thumb := .Fill "800x500" }}
+      <img src="{{ $thumb.RelPermalink }}" alt="{{ $afterName }}" width="800" height="500" loading="lazy">
+      {{ end }}
+      {{ end }}
+    </div>
+    <div class="compare-handle">
+      <div class="handle-arrows">
+        <div class="handle-arrow-left"></div>
+        <div class="handle-arrow-right"></div>
+      </div>
+    </div>
+    <input type="range" class="compare-slider" min="0" max="100" value="50"
+      oninput="this.parentElement.style.setProperty('--pct',this.value+'%')"
+      aria-label="Comparateur avant/après">
+  </div>
+</figure>

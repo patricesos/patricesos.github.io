@@ -81,16 +81,13 @@ Je suis retourné dans CLO3D. J'ai augmenté la *stiffness* du corps, ajouté de
 La série orange est arrivée après ces ajustements. Les plis tombaient mieux, les lumières révélaient la texture du cuir, le monogramme s'alignait presque parfaitement.
 
 {{< gallery >}}
-{{< img-abs src="/projets/louis-v-bag/blue1-before.png" layout="half" name="Version bleue — premier essai, matière encore plastique" >}}
-{{< img-abs src="/projets/louis-v-bag/orange1-after.png" layout="half" name="Version orange — simulation et textures retravaillées" >}}
+{{< compare before="/projets/louis-v-bag/blue1-before.png" after="/projets/louis-v-bag/orange1-after.png" layout="full" beforeName="Version bleue" afterName="Version orange" >}}
 {{< /gallery >}}
-     
 
 Deux autres paires de rendus montrent l'évolution sous différents angles :
 
 {{< gallery >}}
-{{< img-abs src="/projets/louis-v-bag/blue2-before.png" layout="half" name="Série bleue — le pli du rabat manque encore de tension" >}}
-{{< img-abs src="/projets/louis-v-bag/orange2-after.png" layout="half" name="Série orange — la structure tient, les reflets suivent" >}}
+{{< compare before="/projets/louis-v-bag/blue2-before.png" after="/projets/louis-v-bag/blue2-after.png" layout="full" beforeName="Série bleue" afterName="Série orange" >}}
 {{< /gallery >}}
 
 La galerie complète est sur la [page projet](/projets/louis-v-bag/).
