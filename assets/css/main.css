@@ -1401,6 +1401,15 @@ footer a:hover {
     grid-column: span 1;
   }
 
+  .article-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .article-nav a {
+    max-width: 100%;
+  }
+
   .brainyard-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
