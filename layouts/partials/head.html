@@ -24,7 +24,17 @@
 <link rel="preload" href="/fonts/inter/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://player.vimeo.com">
 
-{{ with resources.Get "css/main.css" | resources.Minify | resources.Fingerprint "sha256" }}
-<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
-{{ end }}
+{{ $css := slice
+  (resources.Get "css/base.css")
+  (resources.Get "css/layout.css")
+  (resources.Get "css/content.css")
+  (resources.Get "css/articles.css")
+  (resources.Get "css/taxonomy.css")
+  (resources.Get "css/shortcodes.css")
+  (resources.Get "css/brainyard.css")
+  (resources.Get "css/projets.css")
+  (resources.Get "css/responsive.css")
+}}
+{{ $concat := $css | resources.Concat "css/main.css" | resources.Minify | resources.Fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ $concat.RelPermalink }}" integrity="{{ $concat.Data.Integrity }}">
 <link rel="icon" href="{{ .Site.Params.seo.favicon }}" type="{{ .Site.Params.seo.faviconType }}">

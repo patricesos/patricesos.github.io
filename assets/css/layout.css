@@ -1,0 +1,167 @@
+/* ── Header (Blowfish-inspired) ── */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(239, 239, 237, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+header .container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  height: 46px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ── Header social icons (right of nav) ── */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.0625rem;
+  margin-left: auto;
+}
+
+.header-actions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: #999;
+  border-radius: 5px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.header-actions a:hover {
+  color: var(--text);
+  background: var(--border);
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.2rem;
+  color: var(--text);
+}
+
+/* ── Navigation ── */
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 0.0625rem;
+}
+
+nav a {
+  display: block;
+  padding: 0.3rem 0.7rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text);
+  border-radius: 5px;
+  transition: background 0.2s, color 0.2s;
+}
+
+nav a:hover {
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+nav a[aria-current="page"] {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── Dropdown ── */
+nav li.has-children {
+  position: relative;
+}
+
+nav .sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  flex-direction: column;
+  gap: 0;
+}
+
+nav .sub-menu a {
+  padding: 0.4rem 0.85rem;
+  border-radius: 0;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+nav .sub-menu a:hover {
+  background: var(--bg);
+  color: var(--accent);
+}
+
+nav li.has-children:hover .sub-menu,
+nav li.has-children:focus-within .sub-menu {
+  display: flex;
+}
+
+main {
+  flex: 1;
+  padding: 70px 0 3rem;
+}
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.footer-copy {
+  margin: 0;
+}
+
+footer a {
+  color: var(--text);
+}
+
+footer a:hover {
+  color: var(--accent);
+}

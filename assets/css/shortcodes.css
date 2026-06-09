@@ -1,0 +1,238 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-decoration: none;
+  cursor: default;
+}
+
+.lightbox-close {
+  position: relative;
+  z-index: 2;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.lightbox-content img {
+  max-width: 90vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+
+.lightbox-meta {
+  text-align: left;
+}
+
+.img-name {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: #fff;
+}
+
+.img-copyright {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.2rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+/* ── Comparateur avant/après (slider) ── */
+.compare {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.compare-before {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--pct)) 0 0);
+}
+
+.compare-before img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.compare-after img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Cacher l'effet hover de la galerie sur les compare */
+.project-gallery figure .compare img {
+  transform: none !important;
+}
+
+/* Ligne verticale du curseur */
+.compare::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pct);
+  width: 3px;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.35);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Poignée visuelle — cercle + triangles superposés */
+.compare-handle {
+  position: absolute;
+  top: 50%;
+  left: var(--pct);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.handle-arrows {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.handle-arrow-left,
+.handle-arrow-right {
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.handle-arrow-left {
+  border-width: 5px 6px 5px 0;
+  border-color: transparent #131313 transparent transparent;
+}
+
+.handle-arrow-right {
+  border-width: 5px 0 5px 6px;
+  border-color: transparent transparent transparent #131313;
+}
+
+/* Slider transparent — capte les events, thumb invisible */
+.compare-slider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+  margin: 0;
+  z-index: 2;
+  touch-action: none;
+}
+
+.compare-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+.compare-slider::-moz-range-track {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+.compare-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.compare-slider::-moz-range-thumb {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Labels Avant / Après */
+.compare-before::before,
+.compare-after::before {
+  content: attr(data-label);
+  position: absolute;
+  top: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.compare-before::before {
+  left: 0.75rem;
+}
+
+.compare-after::before {
+  right: 0.75rem;
+}
