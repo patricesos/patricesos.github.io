@@ -1,6 +1,6 @@
 ---
 title: "Louis v Bag"
-weight: 10
+weight: 25
 year: 2026
 cover: "orange1-after.png"
 cardColor: "#fff"
