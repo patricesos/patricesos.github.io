@@ -247,3 +247,22 @@ hugo config              # show current config
 - Pas de `_merge` dans config files (v0.162+)
 - Goldmark renderer en `unsafe = true` (HTML brut autorisé dans le markdown)
 - Les shortcodes `{{< img >}}` et `{{< vimeo >}}` doivent être wrappés dans `{{< gallery >}}` pour éviter la balise `<p>` parasite
+
+## Navigation projet — swap PrevInSection / NextInSection
+Hugo trie les pages d'une section par **poids décroissant** pour `PrevInSection`/`NextInSection`. Le listing projets utilise un tri **croissant** (`.Pages.ByParam "weight"`). Pour que les flèches de navigation projet correspondent à l'ordre du listing, les deux variables sont **swappées** :
+
+```go
+{{ $prev := .NextInSection }}
+{{ $next := .PrevInSection }}
+```
+
+Ne PAS "corriger" ce swap — il est volontaire.
+
+## Chaîne de fallback copyright
+Les shortcodes `img.html` et `img-abs.html` utilisent la chaîne suivante pour le copyright affiché dans la lightbox :
+
+1. Paramètre explicite du shortcode : `{{< img copyright="..." >}}`
+2. `$.Page.Params.copyright` — le front matter de la page courante (leaf bundle ou section)
+3. `site.Params.site.copyright` — le copyright global dans `params.toml`
+
+Pas de `params:` wrapper en front matter pour les sections (Hugo v0.160.1 ne supporte pas l'unwrap et `.Params.copyright` ne fonctionnerait pas).

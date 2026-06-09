@@ -14,7 +14,7 @@
     <img src="{{ $src }}" alt="{{ $name }}">
     <div class="lightbox-meta">
       {{ with $name }}<span class="img-name">{{ . }}</span>{{ end }}
-      <span class="img-copyright">{{ with $copyright }}{{ . }}{{ else }}{{ with site.GetPage "/projets" }}{{ with .Params.copyright }}{{ . }}{{ end }}{{ end }}{{ end }}</span>
+      <span class="img-copyright">{{ $copyright | default $.Page.Params.copyright | default site.Params.site.copyright }}</span>
     </div>
   </div>
 </div>

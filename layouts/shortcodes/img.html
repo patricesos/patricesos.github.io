@@ -17,7 +17,7 @@
     <img src="{{ $img.RelPermalink }}" alt="{{ $name }}" width="{{ $img.Width }}" height="{{ $img.Height }}">
     <div class="lightbox-meta">
       {{ with $name }}<span class="img-name">{{ . }}</span>{{ end }}
-      <span class="img-copyright">{{ with $copyright }}{{ . }}{{ else }}{{ ($.Page.GetPage "/projets").Params.copyright }}{{ end }}</span>
+      <span class="img-copyright">{{ $copyright | default $.Page.Params.copyright | default site.Params.site.copyright }}</span>
     </div>
   </div>
 </div>
