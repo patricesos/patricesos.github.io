@@ -1,5 +1,5 @@
 {{ $id := .Get 0 }}
 {{ $layout := .Get 1 | default "half" }}
 <figure class="{{ $layout }}" style="margin:0;background:#000">
-  <iframe src="https://player.vimeo.com/video/{{ $id }}" style="width:100%;aspect-ratio:16/9;border:0;display:block" allow="autoplay;fullscreen" loading="lazy"></iframe>
+  <iframe src="https://player.vimeo.com/video/{{ $id }}" title="Vimeo video" style="width:100%;aspect-ratio:16/9;border:0;display:block" allow="autoplay;fullscreen" loading="lazy"></iframe>
 </figure>

@@ -126,4 +126,8 @@
   .lightbox {
     padding: 1rem;
   }
+
+  .error-page h1 {
+    font-size: 3.5rem;
+  }
 }
