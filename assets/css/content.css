@@ -109,6 +109,10 @@
   color: var(--accent);
   font-weight: 600;
 }
+
+.home-content > p:last-of-type {
+  text-align: center;
+}
 .error-page {
   text-align: center;
   padding: 4rem 0;

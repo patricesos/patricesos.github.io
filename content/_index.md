@@ -9,7 +9,6 @@ Généraliste 2D/3D & technical artist, je conçois des images et des outils pou
 {{< youtube "6FS-aAWK-Qs" "full" >}}
 {{< /gallery >}}
 
-Ici se trouvent mes projets.
 
 [Voir les projets →](/projets/)
 · [En savoir plus →](/a-propos/)
