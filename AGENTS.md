@@ -4,13 +4,14 @@
 - **Hugo** v0.160.1 (extended) — static site generator
 - **CSS pur** — pas de framework, pas de Tailwind
 - **GitHub Pages** + GitHub Actions (déploiement auto)
+- **Zéro JavaScript** — lightbox CSS-only (`:target`), hamburger CSS-only (checkbox hack)
 
 ## Configuration directory (`config/`)
 On split `hugo.toml` par root key dans `config/_default/` :
 
 ```
 config/_default/
-├── hugo.toml      # baseURL, title, locale, paginate, uglyURLs
+├── hugo.toml      # baseURL, title, locale, paginate, uglyURLs, buildFuture, enableRobotsTXT
 ├── params.toml    # sections : [site], [ui], [hero], [seo], [social]
 ├── menus.toml     # menu.main
 └── markup.toml    # goldmark unsafe = true
@@ -21,6 +22,13 @@ config/_default/
 - `menus.toml` → `[[main]]` (pas `[menus]`)
 
 La fonctionnalité 'root key unwrapping' (inclure `[params]` dans `params.toml`) est arrivée en **v0.162.0** — NE PAS utiliser sur ce projet.
+
+### Clés notables
+- `[site].email` — utilisé dans `single.html` pour injecter le contact sur `/a-propos/`
+- `[hero].logo` — chemin relatif (`images/avatar.png`), fonctionne car le hero n'est que sur `/`
+- `[seo].favicon` — **chemin absolu** (`/favicon.svg`), fonctionne depuis toutes les pages
+- `[seo].ogImage` — chemin relatif (`images/og.svg`), passe par `absURL` dans le template
+- `buildFuture = true` dans `hugo.toml` — les articles futurs sont inclus dans le build
 
 ## Environments
 - `config/development/hugo.toml` → `buildDrafts = true` (pour `hugo server`)
@@ -39,24 +47,30 @@ La fonctionnalité 'root key unwrapping' (inclure `[params]` dans `params.toml`)
 ```
 layouts/
 ├── _default/
-│   ├── baseof.html     # squelette HTML (header block, bodyClass block)
-│   ├── list.html       # sections (brainyard listing, etc.)
-│   └── single.html     # pages (à propos, etc.)
+│   ├── baseof.html       # squelette HTML (header block, bodyClass block)
+│   ├── list.html         # sections (brainyard listing, etc.)
+│   ├── single.html       # pages (à propos, etc.) — injecte email configuré sur /a-propos/
+│   ├── taxonomy.html     # page de tag/catégorie avec liste d'articles
+│   └── terms.html        # page listant tous les tags/catégories avec badges
 ├── brainyard/
-│   └── single.html     # article avec date
+│   └── single.html       # article avec date affichée, navigation
 ├── projets/
-│   ├── list.html       # grille de cartes projet (6-col, overlay)
-│   └── single.html     # page projet modal-like
-├── index.html          # accueil (spacer + grille 6-col + brainyard)
-├── 404.html
+│   ├── list.html         # grille de cartes projet (6-col, overlay, width/height sur images)
+│   └── single.html       # page projet modal-like (header global caché)
+├── index.html            # accueil : hero optionnel (showHero) + {{ .Content }} depuis _index.md
+├── 404.html              # self-hosted GIF (static/images/404.gif)
 ├── shortcodes/
-│   ├── gallery.html    # wrapper `<div class="project-gallery">`
-│   ├── img.html        # image + lightbox
-│   └── vimeo.html      # iframe Vimeo embed
+│   ├── compare.html      # comparateur avant/après avec slider CSS-only
+│   ├── gallery.html      # wrapper `<div class="project-gallery">`
+│   ├── img.html          # image + lightbox (width/height 800x500 thumb, dimensions réelles lightbox)
+│   ├── img-abs.html      # image par chemin absolu (hors leaf bundle), même structure lightbox
+│   └── vimeo.html        # iframe Vimeo embed
 └── partials/
-    ├── head.html       # meta + CSS asset pipeline
-    ├── header.html     # nav responsive (checkbox CSS hack)
-    └── footer.html     # copyright
+    ├── head.html         # meta + SEO (og, twitter), preload Inter, preconnect Vimeo, CSS fingerprint + SRI
+    ├── header.html       # nav responsive (checkbox CSS hack), liens sociaux depuis params.social
+    ├── json-ld.html      # schema.org structuré (WebSite, Article, ProfilePage, CreativeWork, WebPage)
+    ├── social-icon.html  # SVGs inline pour réseaux (réserves: twitter, bluesky, youtube, mastodon, etc.)
+    └── footer.html       # copyright
 ```
 
 ## Navigation
@@ -65,6 +79,12 @@ layouts/
 - **Hamburger** CSS-only via `#menu-toggle:checked ~ nav` (checkbox cachée)
 - Mobile (<768px) : menu vertical, background blanc, caché par défaut
 - Desktop : menu horizontal, `nav a` avec border-radius et hover accent
+
+## Page d'accueil (`index.html`)
+- **Hero optionnel** : contrôlé par `showHero:` dans le front matter de `content/_index.md` (défaut `true`)
+- **Contenu** : `{{ .Content }}` depuis `content/_index.md` — l'utilisateur écrit en markdown + shortcodes
+- **Texte éditorial** dans `.home-content > p, h1, h2, etc.` : `max-width: 540px; margin: auto`
+- Pas de hardcodage de projets ou brainyard dans le template — tout passe par le contenu
 
 ## Page projet (single)
 - **Header global caché** via `{{ if not (and (eq .Section "projets") .IsPage) }}`
@@ -84,16 +104,32 @@ Wrapper qui émet `<div class="project-gallery">`. Contient des `{{< img >}}` ou
 - **src** : nom du fichier image dans le leaf bundle (ex: `"img-1.jpg"`)
 - **layout** : `"half"` (défaut, span 2 cols) ou `"full"` (toute la largeur)
 - **name** : texte affiché dans la lightbox
-- Rendu : `<figure class="layout">` avec thumbnail (Fill 800x500) + lightbox `:target`
+- Rendu : `<figure class="layout">` avec thumbnail `Fill 800x500` + lightbox `:target`
+- **width/height** : thumb `width="800" height="500"` ; lightbox `width="{{ $img.Width }}" height="{{ $img.Height }}"`
 - Copyright : paramètre `params.copyright` dans `content/projets/_index.md` (fallback global)
 - IDs uniques : `lightbox-{{ .Ordinal }}`
+
+### `{{< img-abs src="..." layout="..." name="..." >}}`
+Variante pour images hors leaf bundle (chemin absolu, ex: `/projets/foo/img.png`).
+Pas de Hugo image processing, pas de width/height automatique — fournir `width`/`height` manuellement si besoin.
+Utilisé dans les articles brainyard.
 
 ### `{{< vimeo ID "layout" >}}`
 - **ID** : identifiant Vimeo (positional, obligatoire)
 - **layout** : `"half"` (défaut) ou `"full"` (positionnel, optionnel)
 - Rendu : `<figure class="layout">` avec iframe 16:9 aspect-ratio, fond noir
 
-**Important** : Toujours wrapper les appels dans `{{< gallery >}}` pour éviter que Hugo n'encapsule le shortcode dans une balise `<p>`.
+### `{{< compare before="..." after="..." layout="..." beforeName="..." afterName="..." >}}`
+Comparateur avant/après CSS-only (zéro JS).
+- **before** / **after** : chemin de l'image (`/projets/foo/img.png` pour absolu, ou nom fichier pour leaf bundle)
+- **layout** : `"half"` (défaut) ou `"full"`
+- **beforeName** / **afterName** : labels affichés sur l'image (défaut `"Avant"` / `"Après"`)
+- Rendu : `<figure class="layout">` avec slider `<input type="range">`, poignée + ligne verticale CSS
+- **Convention** : handle à gauche → full after, handle à droite → full before
+- **Fonctionnement** : image before en `position: absolute` (z-index supérieur), clip `inset(0 calc(100% - var(--pct)) 0 0)`, handle + ligne à `left: var(--pct)` — la frontière clipée EST pile sous le handle
+- **Pas besoin de wrapper `gallery`** : le shortcode émet son propre `<figure>`
+
+**Important** : Toujours wrapper les appels sauf `compare` dans `{{< gallery >}}` pour éviter que Hugo n'encapsule le shortcode dans une balise `<p>`.
 
 ## Lightbox (CSS-only)
 - Pseudo-classe `:target` : `.lightbox:target { opacity: 1; visibility: visible }`
@@ -101,7 +137,7 @@ Wrapper qui émet `<div class="project-gallery">`. Contient des `{{< img >}}` ou
 - `.lightbox-content` a `pointer-events: auto` → les clics image/meta ne remontent pas
 - Zéro JavaScript
 
-## Grille projet (listing + home)
+## Grille projet (listing)
 - `grid-template-columns: repeat(6, 1fr)`
 - **card-wide** (index 0-1) : `span 3`, aspect-ratio `1 / 0.85`
 - **card-small** (index 2+) : `span 2`, aspect-ratio `1 / 1.1`
@@ -109,9 +145,28 @@ Wrapper qui émet `<div class="project-gallery">`. Contient des `{{< img >}}` ou
 - Desktop 6-col, mobile 2-col
 
 ## Image processing
-- Thumbnails galerie : `Fill "800x500"`
-- Couverture projet : `Fill "800x600"`
-- Original affiché dans la lightbox
+- Thumbnails galerie : `Fill "800x500"` → `width="800" height="500"`
+- Couverture projet : `Fill "800x600"` → `width="800" height="600"`
+- Lightbox : dimensions réelles via `$img.Width` / `$img.Height`
+- Attributs `width`/`height` sur toutes les images pour éviter CLS
+
+## SEO & Performance
+- **Preload** : Inter Variable font (`<link rel="preload">` avec `crossorigin`)
+- **Preconnect** : `player.vimeo.com`
+- **CSS fingerprinté** : `resources.Get | resources.Minify | resources.Fingerprint "sha256"` avec attribut `integrity` (SRI)
+- **Open Graph** : `og:image` avec `absURL` (chemin relatif depuis config → URL absolue)
+- **Twitter Cards** : `summary_large_image`
+- **JSON-LD** : schema.org structuré (WebSite, Article, ProfilePage, CreativeWork, WebPage)
+- **Sitemap** : auto-généré par Hugo (`/sitemap.xml`)
+- **Canonical** : sur toutes les pages
+- **Favicon** : `/favicon.svg` (chemin absolu fonctionne depuis toutes les pages)
+
+## Accessibilité
+- `:focus` désactivé, `:focus-visible` défini (outline accent `2px solid var(--accent)` + `outline-offset: 2px`)
+- `aria-label` sur le lien hero logo et le hamburger
+- `aria-current="page"` sur le lien de navigation actif
+- `alt` et `loading="lazy"` sur toutes les images
+- Skip link (`Aller au contenu`) en premier élément du body
 
 ## Build & deploy
 - CI : `.github/workflows/hugo.yml`
@@ -121,20 +176,20 @@ Wrapper qui émet `<div class="project-gallery">`. Contient des `{{< img >}}` ou
 ## Content structure
 ```
 content/
-├── _index.md                         # headless (home)
-├── a-propos/_index.md                # bio + contact (email mergé)
+├── _index.md                         # page d'accueil (contenu éditable, hero optionnel)
+├── a-propos/_index.md                # bio + contact (email depuis params.toml, injecté par single.html)
 ├── brainyard/
 │   ├── _index.md                     # listing (title: "Brainyard")
-│   └── bienvenue-dans-le-brainyard.md  # article
+│   ├── bienvenue-dans-le-brainyard.md  # article
+│   └── louis-v-bag.md                # article (utilise compare + img-abs)
 └── projets/                          # leaf bundles
     ├── _index.md                     # params.copyright (fallback global)
     ├── showreel/                     # weight:5 — vidéo + images
     ├── coucher-de-soleil/            # weight:10 — 10 images
     ├── reflets-eau/                  # weight:20 — 10 images
-    ├── promenade-foret/              # weight:30 — 10 images
+    ├── louis-v-bag/                  # weight:25 — 8 images (avant/après, 2 couleurs)
     ├── architecture-moderne/         # weight:40 — 10 images
-    ├── mer-agitee/                   # weight:50 — 10 images
-    └── nuit-etoilee/                 # weight:60 — 10 images
+    └── mer-agitee/                   # weight:50 — 10 images
 ```
 
 ### Front matter projet
@@ -151,6 +206,15 @@ description: "..."    # affiché dans la page projet (480px centré)
 
 Les images sont listées via shortcodes dans le body, pas dans le front matter.
 
+## Archétypes
+```
+archetypes/
+├── brainyard.md      # article brainyard (draft:true, title, description, date)
+├── default.md        # page basique (draft:true, title, date)
+└── projets/
+    └── index.md      # projet (weight, year, description, cover, cardColor)
+```
+
 ## Conventional commits
 Tous les commits doivent suivre le format [Conventional Commits](https://www.conventionalcommits.org/) :
 
@@ -163,7 +227,7 @@ docs: lire le README
 refactor: simplifier le template list
 ```
 
-Scopes courants : `brainyard`, `projets`, `galerie`, `css`, `config`, `ci`, `fonts`, `content`, `layout`, `lightbox`, `shortcodes`
+Scopes courants : `brainyard`, `projets`, `home`, `galerie`, `css`, `config`, `ci`, `fonts`, `content`, `layout`, `lightbox`, `shortcodes`, `a11y`, `perf`, `seo`, `compare`
 
 Ne jamais commit sans raison. Un commit = un changement atomique.
 
@@ -182,4 +246,4 @@ hugo config              # show current config
 - Pas de root key unwrapping dans fichiers splittés (v0.162+)
 - Pas de `_merge` dans config files (v0.162+)
 - Goldmark renderer en `unsafe = true` (HTML brut autorisé dans le markdown)
-- Les shortcodes `{{< img >}}` doivent être wrappés dans `{{< gallery >}}` pour éviter la balise `<p>` parasite
+- Les shortcodes `{{< img >}}` et `{{< vimeo >}}` doivent être wrappés dans `{{< gallery >}}` pour éviter la balise `<p>` parasite
