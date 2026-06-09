@@ -1,14 +1,20 @@
 <!doctype html>
 <html lang="fr">
 <head>{{ partial "head.html" . }}{{ partial "json-ld.html" . }}</head>
-{{- $bg := "" }}
-{{- if .Params.bg }}
-  {{- $bg = .Params.bg }}
-{{- else if ne .Params.bgCascade false }}
-  {{- with .CurrentSection }}
-    {{- if .Params.bg }}
-      {{- $bg = .Params.bg }}
-    {{- else if ne .Params.bgCascade false }}
+{{- $bg := .Params.bg }}
+{{- if not $bg }}
+  {{- if ne .Params.bgCascade false }}
+    {{- $section := .CurrentSection }}
+    {{- if and $section (ne $section.RelPermalink .RelPermalink) }}
+      {{- if and $section.Params.bg (ne $section.Params.bgCascade false) }}
+        {{- $bg = $section.Params.bg }}
+      {{- end }}
+      {{- if not $bg }}
+        {{- if ne $section.Params.bgCascade false }}
+          {{- $bg = site.Params.site.bg }}
+        {{- end }}
+      {{- end }}
+    {{- else }}
       {{- $bg = site.Params.site.bg }}
     {{- end }}
   {{- end }}
