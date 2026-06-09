@@ -57,7 +57,7 @@
 
 .home-hero-logo-link:hover .home-hero-logo {
   filter: brightness(1.15);
-  box-shadow: 0 6px 28px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
 }
 
 .home-hero-logo {
@@ -67,8 +67,10 @@
   width: auto;
   overflow: hidden;
   border-radius: 4px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  transition: filter 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition:
+    filter 0.3s,
+    box-shadow 0.3s;
 }
 
 .home-hero-logo.round {
@@ -111,7 +113,7 @@
 }
 
 .home-content > p:first-of-type {
-  text-align: justify;
+  text-align: center;
 }
 
 .home-content > p:last-of-type {

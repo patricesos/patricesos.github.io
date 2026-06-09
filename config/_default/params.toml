@@ -2,6 +2,7 @@
   description = "Portfolio de Patrice — généraliste 2D/3D & technical artist"
   copyright = "Patrice Gnimdou SOSSOU"
   email = "patricesos7@gmail.com"
+  # bg = "#1a1a2e"                    # fond global (optionnel, cascade page > section > site)
 
 [ui]
   accentColor = "#7ec8e3"

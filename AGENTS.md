@@ -25,6 +25,7 @@ La fonctionnalité 'root key unwrapping' (inclure `[params]` dans `params.toml`)
 
 ### Clés notables
 - `[site].email` — utilisé dans `single.html` pour injecter le contact sur `/a-propos/`
+- `[site].bg` — fond global optionnel (cascade page > section > site, voir détails ci-dessous)
 - `[hero].logo` — chemin relatif (`images/avatar.png`), fonctionne car le hero n'est que sur `/`
 - `[seo].favicon` — **chemin absolu** (`/favicon.svg`), fonctionne depuis toutes les pages
 - `[seo].ogImage` — chemin relatif (`images/og.svg`), passe par `absURL` dans le template
@@ -274,6 +275,31 @@ Les shortcodes `img.html` et `img-abs.html` utilisent la chaîne suivante pour l
 3. `site.Params.site.copyright` — le copyright global dans `params.toml`
 
 Pas de `params:` wrapper en front matter pour les sections (Hugo v0.160.1 ne supporte pas l'unwrap et `.Params.copyright` ne fonctionnerait pas).
+
+## Fond de page configurable (`bg` + `bgCascade`)
+
+Le paramètre `bg` dans le frontmatter définit un fond de page via `style="background:..."` sur `<body>`. Accepte toute valeur CSS valide (couleur, gradient, image).
+
+**Cascade** (page → section → site) :
+1. `page.Params.bg` — le plus prioritaire
+2. `.CurrentSection.Params.bg` — hérité de la section si pas défini sur la page
+3. `site.Params.site.bg` — global dans `params.toml`
+
+**`bgCascade: false`** bloque la remontée : la page/section n'hérite pas du niveau supérieur.
+
+Exemples :
+```yaml
+# config/_default/params.toml → global
+[site]
+bg = "#1a1a2e"
+
+# content/brainyard/_index.md → section
+bg = "#f5f0e8"
+
+# content/brainyard/article.md → page
+bg = "url(/images/bg.jpg) center/cover"
+bgCascade: false   # n'hérite pas du fond de la section
+```
 
 ## Session History
 

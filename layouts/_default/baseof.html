@@ -1,7 +1,19 @@
 <!doctype html>
 <html lang="fr">
 <head>{{ partial "head.html" . }}{{ partial "json-ld.html" . }}</head>
-<body>
+{{- $bg := "" }}
+{{- if .Params.bg }}
+  {{- $bg = .Params.bg }}
+{{- else if ne .Params.bgCascade false }}
+  {{- with .CurrentSection }}
+    {{- if .Params.bg }}
+      {{- $bg = .Params.bg }}
+    {{- else if ne .Params.bgCascade false }}
+      {{- $bg = site.Params.site.bg }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+<body{{ with $bg }} style="background:{{ . }}"{{ end }}>
 {{ if not (and (eq .Section "projets") .IsPage) }}{{ partial "header.html" . }}{{ end }}
 <main id="main-content" class="{{ block "bodyClass" . }}default{{ end }}">
   <div class="container">
