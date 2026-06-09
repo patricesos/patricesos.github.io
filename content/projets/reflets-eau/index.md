@@ -8,7 +8,7 @@ description: "Étude de réfraction et de reflets sur une surface d'eau calme. T
 ---
 
 {{< gallery >}}
-{{< img src="img-2.jpg" layout="full" >}}
+{{< img src="img-2.jpg" layout="full" name="Reflets dans l'eau" >}}
 {{< img src="img-02.jpg" layout="half" name="Surface calme" >}}
 {{< img src="img-03.jpg" layout="half" name="Rivière miroir" >}}
 {{< img src="img-04.jpg" layout="full" name="Douce ondulation" >}}

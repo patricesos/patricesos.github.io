@@ -4,7 +4,7 @@
 - **Hugo** v0.160.1 (extended) — static site generator
 - **CSS pur** — pas de framework, pas de Tailwind
 - **GitHub Pages** + GitHub Actions (déploiement auto)
-- **Zéro JavaScript** — lightbox CSS-only (`:target`), hamburger CSS-only (checkbox hack)
+- **Zéro JavaScript** (sauf un inline `oninput` sur le range slider du comparateur — seule exception, pas d'alternative CSS-only) — lightbox CSS-only (`:target`), hamburger CSS-only (checkbox hack)
 
 ## Configuration directory (`config/`)
 On split `hugo.toml` par root key dans `config/_default/` :

@@ -3,12 +3,14 @@
 {{ $layout := .Get "layout" | default "half" }}
 {{ $beforeName := .Get "beforeName" | default "Avant" }}
 {{ $afterName := .Get "afterName" | default "Après" }}
+{{ $width := .Get "width" }}
+{{ $height := .Get "height" }}
 
 <figure class="{{ $layout }}">
   <div class="compare" style="--pct: 50%">
     <div class="compare-before" data-label="{{ $beforeName }}">
       {{ if hasPrefix $before "/" }}
-      <img src="{{ $before }}" alt="{{ $beforeName }}" loading="lazy">
+      <img src="{{ $before }}" alt="{{ $beforeName }}" loading="lazy"{{ with $width }} width="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}>
       {{ else }}
       {{ with $.Page.Resources.GetMatch $before }}
       {{ $thumb := .Fill "800x500" }}
@@ -18,7 +20,7 @@
     </div>
     <div class="compare-after" data-label="{{ $afterName }}">
       {{ if hasPrefix $after "/" }}
-      <img src="{{ $after }}" alt="{{ $afterName }}" loading="lazy">
+      <img src="{{ $after }}" alt="{{ $afterName }}" loading="lazy"{{ with $width }} width="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}>
       {{ else }}
       {{ with $.Page.Resources.GetMatch $after }}
       {{ $thumb := .Fill "800x500" }}
@@ -34,6 +36,6 @@
     </div>
     <input type="range" class="compare-slider" min="0" max="100" value="50"
       oninput="this.parentElement.style.setProperty('--pct',this.value+'%')"
-      aria-label="Comparateur avant/après">
+      aria-label="Comparateur avant/après"><!-- seul inline JS du site : nécessaire car pas d'alternative CSS-only pour un range slider -->
   </div>
 </figure>

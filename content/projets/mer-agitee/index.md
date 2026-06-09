@@ -8,7 +8,7 @@ description: "Simulation d'une mer déchaînée avec embruns et mouvement de sur
 ---
 
 {{< gallery >}}
-{{< img src="img-5.jpg" layout="full" >}}
+{{< img src="img-5.jpg" layout="full" name="Mer agitée" >}}
 {{< img src="img-02.jpg" layout="half" name="Vague déferlante" >}}
 {{< img src="img-03.jpg" layout="half" name="Écume blanche" >}}
 {{< img src="img-04.jpg" layout="full" name="Ciel d'orage" >}}

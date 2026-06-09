@@ -8,7 +8,7 @@ description: "Exploration de lumière chaude sur une skyline urbaine. Travail su
 ---
 
 {{< gallery >}}
-{{< img src="img-1.jpg" layout="full" >}}
+{{< img src="img-1.jpg" layout="full" name="Coucher de soleil sur la ville" >}}
 {{< img src="img-02.jpg" layout="half" name="Dernière lumière sur les toits" >}}
 {{< img src="img-03.jpg" layout="half" name="Silhouettes urbaines" >}}
 {{< img src="img-04.jpg" layout="full" name="Ciel orangé" >}}

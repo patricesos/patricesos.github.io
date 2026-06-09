@@ -12,7 +12,11 @@
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.lightbox:target {
+.lightbox-toggle {
+  display: none;
+}
+
+.lightbox-toggle:checked + figure + .lightbox {
   opacity: 1;
   visibility: visible;
 }

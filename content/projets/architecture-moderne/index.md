@@ -8,7 +8,7 @@ description: "Visualisation architecturale d'un bâtiment contemporain. Lignes �
 ---
 
 {{< gallery >}}
-{{< img src="img-4.jpg" layout="full" >}}
+{{< img src="img-4.jpg" layout="full" name="Architecture moderne" >}}
 {{< img src="img-02.jpg" layout="half" name="Façade vitrée" >}}
 {{< img src="img-03.jpg" layout="half" name="Lignes épurées" >}}
 {{< img src="img-04.jpg" layout="full" name="Jeu d'ombres" >}}
