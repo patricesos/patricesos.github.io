@@ -64,7 +64,8 @@ layouts/
 │   ├── gallery.html      # wrapper `<div class="project-gallery">`
 │   ├── img.html          # image + lightbox (width/height 800x500 thumb, dimensions réelles lightbox)
 │   ├── img-abs.html      # image par chemin absolu (hors leaf bundle), même structure lightbox
-│   └── vimeo.html        # iframe Vimeo embed
+│   ├── vimeo.html        # iframe Vimeo embed
+│   └── youtube.html      # iframe YouTube embed (no-cookie)
 └── partials/
     ├── head.html         # meta + SEO (og, twitter), preload Inter, preconnect Vimeo, CSS fingerprint + SRI
     ├── header.html       # nav responsive (checkbox CSS hack), liens sociaux depuis params.social
@@ -106,7 +107,7 @@ Wrapper qui émet `<div class="project-gallery">`. Contient des `{{< img >}}` ou
 - **name** : texte affiché dans la lightbox
 - Rendu : `<figure class="layout">` avec thumbnail `Fill 800x500` + lightbox `:target`
 - **width/height** : thumb `width="800" height="500"` ; lightbox `width="{{ $img.Width }}" height="{{ $img.Height }}"`
-- Copyright : paramètre `params.copyright` dans `content/projets/_index.md` (fallback global)
+- Copyright : chaîne de fallback — param shortcode `copyright=""` → `.Page.Params.copyright` → `site.Params.site.copyright`
 - IDs uniques : `lightbox-{{ .Ordinal }}`
 
 ### `{{< img-abs src="..." layout="..." name="..." >}}`
@@ -117,7 +118,13 @@ Utilisé dans les articles brainyard.
 ### `{{< vimeo ID "layout" >}}`
 - **ID** : identifiant Vimeo (positional, obligatoire)
 - **layout** : `"half"` (défaut) ou `"full"` (positionnel, optionnel)
-- Rendu : `<figure class="layout">` avec iframe 16:9 aspect-ratio, fond noir
+- Rendu : `<figure class="layout">` avec iframe 16:9 aspect-ratio, fond noir, attribut `title="Vimeo video"`
+
+### `{{< youtube ID "layout" >}}`
+- **ID** : identifiant YouTube (positional, obligatoire)
+- **layout** : `"half"` (défaut) ou `"full"` (positionnel, optionnel)
+- Utilise `youtube-nocookie.com` pour le respect de la vie privée
+- Rendu : `<figure class="layout">` avec iframe 16:9 aspect-ratio, fond noir, attribut `title="YouTube video"`
 
 ### `{{< compare before="..." after="..." layout="..." beforeName="..." afterName="..." >}}`
 Comparateur avant/après CSS-only (zéro JS).
@@ -152,7 +159,7 @@ Comparateur avant/après CSS-only (zéro JS).
 
 ## SEO & Performance
 - **Preload** : Inter Variable font (`<link rel="preload">` avec `crossorigin`)
-- **Preconnect** : `player.vimeo.com`
+- **Preconnect** : `player.vimeo.com`, `www.youtube-nocookie.com`
 - **CSS fingerprinté** : `resources.Get | resources.Minify | resources.Fingerprint "sha256"` avec attribut `integrity` (SRI)
 - **Open Graph** : `og:image` avec `absURL` (chemin relatif depuis config → URL absolue)
 - **Twitter Cards** : `summary_large_image`
@@ -230,6 +237,7 @@ refactor: simplifier le template list
 Scopes courants : `brainyard`, `projets`, `home`, `galerie`, `css`, `config`, `ci`, `fonts`, `content`, `layout`, `lightbox`, `shortcodes`, `a11y`, `perf`, `seo`, `compare`
 
 Ne jamais commit sans raison. Un commit = un changement atomique.
+**Ne jamais push sans instruction explicite** — commits locaux uniquement, sauf demande contraire.
 
 ## Commandes utiles
 ```bash
@@ -246,7 +254,7 @@ hugo config              # show current config
 - Pas de root key unwrapping dans fichiers splittés (v0.162+)
 - Pas de `_merge` dans config files (v0.162+)
 - Goldmark renderer en `unsafe = true` (HTML brut autorisé dans le markdown)
-- Les shortcodes `{{< img >}}` et `{{< vimeo >}}` doivent être wrappés dans `{{< gallery >}}` pour éviter la balise `<p>` parasite
+- Les shortcodes `{{< img >}}`, `{{< vimeo >}}` et `{{< youtube >}}` doivent être wrappés dans `{{< gallery >}}` pour éviter la balise `<p>` parasite
 
 ## Navigation projet — swap PrevInSection / NextInSection
 Hugo trie les pages d'une section par **poids décroissant** pour `PrevInSection`/`NextInSection`. Le listing projets utilise un tri **croissant** (`.Pages.ByParam "weight"`). Pour que les flèches de navigation projet correspondent à l'ordre du listing, les deux variables sont **swappées** :
@@ -266,3 +274,21 @@ Les shortcodes `img.html` et `img-abs.html` utilisent la chaîne suivante pour l
 3. `site.Params.site.copyright` — le copyright global dans `params.toml`
 
 Pas de `params:` wrapper en front matter pour les sections (Hugo v0.160.1 ne supporte pas l'unwrap et `.Params.copyright` ne fonctionnerait pas).
+
+## Session History
+
+### 2026-06-09 — CSS split, compare slider, copyright chain, divers fixes
+
+**CSS split**: `main.css` → 9 fichiers modulaires dans `assets/css/` (base, layout, content, articles, taxonomy, shortcodes, brainyard, projets, responsive). Concatenation via `resources.Concat` dans `head.html` avec fingerprint + SRI inchangé.
+
+**Compare slider corrigé**: clip `inset(0 calc(100% - var(--pct)) 0 0)` sur `.compare-before` — le handle, la ligne et la frontière clipée sont toujours alignés à `var(--pct)`. Supprimé `dir="rtl"` et `--clip`. Convention : glisser à droite = révéler plus d'avant.
+
+**Copyright chain unifiée** dans `img.html` et `img-abs.html` : param shortcode → `.Page.Params.copyright` → `site.Params.site.copyright`. Retiré `params:` wrapper dans `content/projets/_index.md`.
+
+**Lightbox z-index** : `200` → `1002` (au-dessus du header à 1000). Doublon `.lightbox-close` supprimé.
+
+**Navigation projets** : swap `PrevInSection`/`NextInSection` conservé (volontaire — Hugo trie les sections par poids décroissant).
+
+**Divers** : date en français (`2 janvier 2006`), weight `louis-v-bag` 10→25, sub-pixel border 0.5px→1px, line-clamp articles, padding `.page-content`, hamburger checkbox avant nav dans le DOM, `.error-page h1` responsive (6rem→3.5rem), JSON-LD `.Lastmod` avec garde `.IsZero`, iframe Vimeo avec `title`.
+
+**Commits** : `227de69`, `f44f711`, `a2149e6`, `8f3c458`, `1493df6`, `1d8cbf9`, `bb803d4`
