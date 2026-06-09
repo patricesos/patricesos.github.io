@@ -441,6 +441,7 @@ main {
 .article-item-body {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .article-item time {
