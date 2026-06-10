@@ -83,6 +83,39 @@
   opacity: 1;
   text-decoration: none;
 }
+
+.lightbox .nav-prev,
+.lightbox .nav-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  font-size: 2.25rem;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  padding: 1.5rem 0.75rem;
+  line-height: 1;
+  background: rgba(0,0,0,0.15);
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  user-select: none;
+  text-decoration: none;
+}
+
+.lightbox .nav-prev:hover,
+.lightbox .nav-next:hover {
+  color: #fff;
+  background: rgba(0,0,0,0.35);
+}
+
+.lightbox .nav-prev {
+  left: 0.5rem;
+}
+
+.lightbox .nav-next {
+  right: 0.5rem;
+}
+
 /* ── Comparateur avant/après (slider) ── */
 .compare {
   position: relative;

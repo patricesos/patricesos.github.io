@@ -4,15 +4,18 @@
 {{ $copyright := .Get "copyright" }}
 {{ $width := .Get "width" }}
 {{ $height := .Get "height" }}
-<input type="checkbox" id="lightbox-abs-{{ .Ordinal }}" class="lightbox-toggle" aria-hidden="true">
+{{ $uid := $.Page.File.UniqueID }}
+<input type="radio" name="gallery-{{ $uid }}" id="g-abs-{{ $uid }}-{{ .Ordinal }}" class="lightbox-toggle" aria-hidden="true">
 <figure class="{{ $layout }}">
-  <label for="lightbox-abs-{{ .Ordinal }}">
+  <label for="g-abs-{{ $uid }}-{{ .Ordinal }}">
     <img src="{{ $src }}" alt="{{ $name }}" loading="lazy"{{ with $width }} width="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}>
   </label>
 </figure>
 <div class="lightbox">
-  <label for="lightbox-abs-{{ .Ordinal }}" class="lightbox-bg"></label>
-  <label for="lightbox-abs-{{ .Ordinal }}" class="lightbox-close">&times;</label>
+  {{ if gt .Ordinal 0 }}<label for="g-abs-{{ $uid }}-{{ sub .Ordinal 1 }}" class="nav-prev" aria-label="Image précédente">‹</label>{{ end }}
+  <label for="g-abs-{{ $uid }}-{{ add .Ordinal 1 }}" class="nav-next" aria-label="Image suivante">›</label>
+  <label for="g-{{ $uid }}-none" class="lightbox-bg"></label>
+  <label for="g-{{ $uid }}-none" class="lightbox-close">&times;</label>
   <div class="lightbox-content">
     <img src="{{ $src }}" alt="{{ $name }}"{{ with $width }} width="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}>
     <div class="lightbox-meta">
