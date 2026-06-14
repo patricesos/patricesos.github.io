@@ -1,5 +1,6 @@
 <footer>
   <div class="container">
     <p class="footer-copy">&copy; {{ now.Year }} {{ with .Site.Params.site.copyright }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</p>
+    <p class="footer-copy">{{ .Site.Params.site.location }}</p>
   </div>
 </footer>

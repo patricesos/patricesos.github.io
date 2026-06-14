@@ -39,3 +39,5 @@
 {{ $concat := $css | resources.Concat "css/main.css" | resources.Minify | resources.Fingerprint "sha256" }}
 <link rel="stylesheet" href="{{ $concat.RelPermalink }}" integrity="{{ $concat.Data.Integrity }}">
 <link rel="icon" href="{{ .Site.Params.seo.favicon }}" type="{{ .Site.Params.seo.faviconType }}">
+{{ $js := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint "sha256" }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>

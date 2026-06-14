@@ -4,7 +4,7 @@
 - **Hugo** v0.160.1 (extended) — static site generator
 - **CSS pur** — pas de framework, pas de Tailwind
 - **GitHub Pages** + GitHub Actions (déploiement auto)
-- **Zéro JavaScript** (sauf un inline `oninput` sur le range slider du comparateur — seule exception, pas d'alternative CSS-only) — lightbox CSS-only (`:target`), hamburger CSS-only (checkbox hack)
+- **JavaScript minimal** : `assets/js/main.js` (curseur custom, parallax hero, scroll reveals, lazy showreel, cleanup nav lightbox) — livré avec `defer`, zéro dépendance. Le site reste fonctionnel sans JS. Seul inline JS : `oninput` sur le slider compare (pas d'alternative CSS-only).
 
 ## Configuration directory (`config/`)
 On split `hugo.toml` par root key dans `config/_default/` :
@@ -106,10 +106,10 @@ Wrapper qui émet `<div class="project-gallery">`. Contient des `{{< img >}}` ou
 - **src** : nom du fichier image dans le leaf bundle (ex: `"img-1.jpg"`)
 - **layout** : `"half"` (défaut, span 2 cols) ou `"full"` (toute la largeur)
 - **name** : texte affiché dans la lightbox
-- Rendu : `<figure class="layout">` avec thumbnail `Fill 800x500` + lightbox `:target`
+- Rendu : `<input type="radio">` (hack radio buttons) + `<figure class="layout">` avec thumbnail `Fill 800x500` + `<div class="lightbox">`
 - **width/height** : thumb `width="800" height="500"` ; lightbox `width="{{ $img.Width }}" height="{{ $img.Height }}"`
 - Copyright : chaîne de fallback — param shortcode `copyright=""` → `.Page.Params.copyright` → `site.Params.site.copyright`
-- IDs uniques : `lightbox-{{ .Ordinal }}`
+- IDs : `g-{uid}-{ordinal}` (radio image), `g-{uid}-none-{ordinal}` (radio fermeture), navigation prev/next pointe vers ordinal ±1
 
 ### `{{< img-abs src="..." layout="..." name="..." >}}`
 Variante pour images hors leaf bundle (chemin absolu, ex: `/projets/foo/img.png`).
@@ -139,11 +139,13 @@ Comparateur avant/après CSS-only (zéro JS).
 
 **Important** : Toujours wrapper les appels sauf `compare` dans `{{< gallery >}}` pour éviter que Hugo n'encapsule le shortcode dans une balise `<p>`.
 
-## Lightbox (CSS-only)
-- Pseudo-classe `:target` : `.lightbox:target { opacity: 1; visibility: visible }`
-- **Fermeture** : clic sur ✕ **OU** clic sur le fond noir (via `.lightbox-bg` : anchor invisible inset:0 z-index:1)
-- `.lightbox-content` a `pointer-events: auto` → les clics image/meta ne remontent pas
-- Zéro JavaScript
+## Lightbox (radio buttons + JS)
+- **Hack radio buttons** : chaque image émet `<input type="radio" name="gallery-{uid}">`. Le lightbox s'ouvre via `.lightbox-toggle:checked + figure + .lightbox { opacity: 1; visibility: visible }`.
+- **Radio `none`** : chaque image a un radio `g-{uid}-none-{ordinal}` avant son radio image. Quand la close le sélectionne, le sélecteur CSS ne matche pas (le frère du radio none est le radio image, pas figure) → lumière fermée.
+- **Navigation** : labels prev/next avec `for="g-{uid}-{ordinal±1}"` — radio même groupe, zéro JS pour le changement d'image.
+- **Fermeture** : clic sur ✕ ou fond noir → `<label for="g-{uid}-none-{ordinal}">` sélectionne le radio none.
+- **JS cleanup** : `main.js` cache les boutons nav dont la cible radio n'existe pas (dernière image).
+- `.lightbox-content` a `pointer-events: auto` → les clics image/meta ne remontent pas.
 
 ## Grille projet (listing)
 - `grid-template-columns: repeat(6, 1fr)`
@@ -255,7 +257,7 @@ hugo config              # show current config
 - Pas de root key unwrapping dans fichiers splittés (v0.162+)
 - Pas de `_merge` dans config files (v0.162+)
 - Goldmark renderer en `unsafe = true` (HTML brut autorisé dans le markdown)
-- Les shortcodes `{{< img >}}`, `{{< vimeo >}}` et `{{< youtube >}}` doivent être wrappés dans `{{< gallery >}}` pour éviter la balise `<p>` parasite
+- Les shortcodes `{{< img >}}` et `{{< vimeo >}}` doivent être wrappés dans `{{< gallery >}}` pour éviter la balise `<p>` parasite. `{{< youtube >}}` n'a pas besoin de wrapper (émet son propre conteneur).
 
 ## Navigation projet — swap PrevInSection / NextInSection
 Hugo trie les pages d'une section par **poids décroissant** pour `PrevInSection`/`NextInSection`. Le listing projets utilise un tri **croissant** (`.Pages.ByParam "weight"`). Pour que les flèches de navigation projet correspondent à l'ordre du listing, les deux variables sont **swappées** :
@@ -318,3 +320,26 @@ bgCascade: false   # n'hérite pas du fond de la section
 **Divers** : date en français (`2 janvier 2006`), weight `louis-v-bag` 10→25, sub-pixel border 0.5px→1px, line-clamp articles, padding `.page-content`, hamburger checkbox avant nav dans le DOM, `.error-page h1` responsive (6rem→3.5rem), JSON-LD `.Lastmod` avec garde `.IsZero`, iframe Vimeo avec `title`.
 
 **Commits** : `227de69`, `f44f711`, `a2149e6`, `8f3c458`, `1493df6`, `1d8cbf9`, `bb803d4`
+
+### 2026-06-14 — Lightbox radio buttons, showHero, sweep fixes
+
+**Lightbox refactored**: `:target` → radio buttons. Chaque image émet `<input type="radio">` + `<figure>` + `<div class="lightbox">` (siblings). Un seul lightbox ouvert à la fois (même `name`). Plus de hash URL → pas de scroll au toggle.
+
+**Radio `none`** pour fermeture : chaque image a un radio `g-{uid}-none-{ordinal}` avant son radio image. Les labels close/bg le ciblent. Sélectionné → désélectionne l'image → lumière fermée. Fonctionne aussi hors gallery.
+
+**Navigation prev/next** : labels `for` ordinal ±1 dans le même groupe radio. JS cleanup cache les boutons morts (dernière image). 0 JS pour le fonctionnement normal.
+
+**`showHero` param** : `layouts/index.html` lit désormais `.Params.showHero | default true` — respecte `showHero: false` dans le front matter de `_index.md`.
+
+**CSS cleanup** :
+- `.skip-link` dédupliqué (gardé dans `base.css`, retiré de `layout.css`)
+- Nav responsive consolidée dans `responsive.css` (768px, `display: flex`). `layout.css` @700px garde seulement les règles non-nav (hero-bg-word, grid projets, cursor).
+- `nav a[aria-current="page"]` ajouté dans la media query mobile.
+
+**`bgCascade: true`** retiré de `brainyard/_index.md` (redondant, default `true`).
+
+**Gallery YouTube** : retiré `{{< gallery >}}` autour du YouTube sur l'accueil — plus de classe `.project-gallery` parasite.
+
+**Pivot JS** : `AGENTS.md` mis à jour (plus de "zéro JavaScript"). JS reste minimal, site fonctionnel sans. `main.js` livré avec `defer`.
+
+**Files modifiés** : `layouts/shortcodes/gallery.html`, `img.html`, `img-abs.html`, `layouts/index.html`, `assets/css/layout.css`, `responsive.css`, `content/_index.md`, `content/brainyard/_index.md`, `assets/js/main.js`, `AGENTS.md`

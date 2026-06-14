@@ -2,15 +2,22 @@
   description = "Portfolio de Patrice — généraliste 2D/3D & technical artist"
   copyright = "Patrice Gnimdou SOSSOU"
   email = "patricesos7@gmail.com"
+  location = "Rotterdam · NL"
   # bg = "#1a1a2e"                    # fond global (optionnel, cascade page > section > site)
+  bg = "#fffff"                    # fond global (optionnel, cascade page > section > site)
 
 [ui]
+  # accentColor = "#7ec8e3"
   accentColor = "#7ec8e3"
   darkBg = "#131313"
 
 [hero]
   name = "Patrice"
+  surname = "Gnimdou"
+  lastname = "SOSSOU"
   tagline = "Généraliste 2D/3D · Technical Artist"
+  bgWord = "BRAINYARD"
+  scrollText = "Scroll"
   logo = "images/avatar.png"
   logoShape = "rounded-square" # square, round, rounded-square
 
@@ -21,6 +28,30 @@
   ogSiteName = "Patrice's Brainyard"
   ogLocale = "fr_FR"
   ogImage = "images/og.svg"
+
+[home]
+  heroCtaSolid = "Voir les projets →"
+  heroCtaGhost = "En savoir plus"
+  showreelTitle = "Showreel 2026"
+  showreelLabel = "Lancer le showreel"
+  showreelCta = "Page projet →"
+  showreelYoutubeId = "6FS-aAWK-Qs"
+  projetsTitle = "Projets récents"
+  projetsCta = "Tout voir →"
+  brainyardTitle = "Brainyard"
+  brainyardCta = "Tout lire →"
+
+[marquee]
+  items = [
+    "Cinema 4D",
+    "Motion Design",
+    "FX & Simulation",
+    "Technical Art",
+    "Python",
+    "C++",
+    "Hugo",
+    "Architecture viz",
+  ]
 
 [social]
   artstation = "https://artstation.com/patricesos"

@@ -20,12 +20,15 @@
   {{- end }}
 {{- end }}
 <body{{ with $bg }} style="background:{{ . }}"{{ end }}>
+<div id="brainyard-cursor" aria-hidden="true"></div>
+<div id="brainyard-cursor-ring" aria-hidden="true"></div>
 {{ if not (and (eq .Section "projets") .IsPage) }}{{ partial "header.html" . }}{{ end }}
-<main id="main-content" class="{{ block "bodyClass" . }}default{{ end }}">
+<main id="main-content" class="{{ block "bodyClass" . }}default{{ end }}" >
   <div class="container">
     {{ block "main" . }}{{ end }}
   </div>
 </main>
+{{ block "extraFooter" . }}{{ end }}
 {{ partial "footer.html" . }}
 </body>
 </html>

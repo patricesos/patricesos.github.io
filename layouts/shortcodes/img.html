@@ -6,6 +6,7 @@
 {{ $uid := $.Page.File.UniqueID }}
 {{ if $img }}
 {{ $thumb := $img.Fill "800x500" }}
+<input type="radio" name="gallery-{{ $uid }}" id="g-{{ $uid }}-none-{{ .Ordinal }}" class="lightbox-toggle" aria-hidden="true">
 <input type="radio" name="gallery-{{ $uid }}" id="g-{{ $uid }}-{{ .Ordinal }}" class="lightbox-toggle" aria-hidden="true">
 <figure class="{{ $layout }}">
   <label for="g-{{ $uid }}-{{ .Ordinal }}">
@@ -15,8 +16,8 @@
 <div class="lightbox">
   {{ if gt .Ordinal 0 }}<label for="g-{{ $uid }}-{{ sub .Ordinal 1 }}" class="nav-prev" aria-label="Image précédente">‹</label>{{ end }}
   <label for="g-{{ $uid }}-{{ add .Ordinal 1 }}" class="nav-next" aria-label="Image suivante">›</label>
-  <label for="g-{{ $uid }}-none" class="lightbox-bg"></label>
-  <label for="g-{{ $uid }}-none" class="lightbox-close">&times;</label>
+  <label for="g-{{ $uid }}-none-{{ .Ordinal }}" class="lightbox-bg"></label>
+  <label for="g-{{ $uid }}-none-{{ .Ordinal }}" class="lightbox-close">&times;</label>
   <div class="lightbox-content">
     <img src="{{ $img.RelPermalink }}" alt="{{ $name }}" width="{{ $img.Width }}" height="{{ $img.Height }}">
     <div class="lightbox-meta">
